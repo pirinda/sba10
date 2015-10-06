@@ -30,6 +30,8 @@ public class DGridCellRendererIcon extends DefaultTableCellRenderer {
     public static final ImageIcon moIconXmlPending = new ImageIcon(new Object().getClass().getResource("/sba/lib/img/view_xml_pend.png"));
     public static final ImageIcon moIconXmlIssued = new ImageIcon(new Object().getClass().getResource("/sba/lib/img/view_xml_issu.png"));
     public static final ImageIcon moIconXmlAnnulled = new ImageIcon(new Object().getClass().getResource("/sba/lib/img/view_xml_annul.png"));
+    public static final ImageIcon moIconXmlAnnulledPdf = new ImageIcon(new Object().getClass().getResource("/sa/lib/img/view_xml_annul_pdf.png"));
+    public static final ImageIcon moIconXmlAnnulledXml = new ImageIcon(new Object().getClass().getResource("/sa/lib/img/view_xml_annul_xml.png"));
 
     private JLabel moLabel;
 
@@ -81,6 +83,12 @@ public class DGridCellRendererIcon extends DefaultTableCellRenderer {
                 break;
             case DGridConsts.ICON_XML_ANNUL:
                 moLabel.setIcon(moIconXmlAnnulled);
+                break;
+            case DGridConsts.ICON_XML_ANNUL_PDF:
+                moLabel.setIcon(moIconXmlAnnulledPdf);
+                break;
+            case DGridConsts.ICON_XML_ANNUL_XML:
+                moLabel.setIcon(moIconXmlAnnulledXml);
                 break;
             default:
                 moLabel.setIcon(moIconNull);

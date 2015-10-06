@@ -94,6 +94,8 @@ public abstract class DGridConsts {
     public static final int ICON_XML_PEND = 21;
     public static final int ICON_XML_ISSU = 22;
     public static final int ICON_XML_ANNUL = 23;
+    public static final int ICON_XML_ANNUL_PDF = 26;
+    public static final int ICON_XML_ANNUL_XML = 27;
 
     public static final Color COLOR_FG_EDIT = new Color(0, 0, 255);
     public static final Color COLOR_FG_EDIT_NEG = new Color(255, 0, 0);
