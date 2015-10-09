@@ -108,6 +108,7 @@ public class DGuiConsts {
     public static final String MSG_OPTION_DBL_CLICK = "Hacer doble click para elegir una opción";
 
     public static final String MSG_CNF_FIELD_VAL_ = "¿Está seguro(a) que el valor del campo ";
+    public static final String MSG_CNF_FIELD_VAL_EQU = " sea igual a ";
     public static final String MSG_CNF_FIELD_VAL_DIF = " sea distinto a ";
     public static final String MSG_CNF_FIELD_VAL_DIF_FIELD = " sea distinto al del campo ";
     public static final String MSG_CNF_FIELD_VAL_UNDEF = " no haya sido especificado?";
