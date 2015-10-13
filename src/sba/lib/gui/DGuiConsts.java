@@ -140,6 +140,7 @@ public class DGuiConsts {
     public static final String ERR_MSG_FIELD_DATE_GREAT_EQUAL = " debe ser posterior o igual a ";
     public static final String ERR_MSG_FIELD_DATE_YEAR = " debe pertenecer al ejercicio ";
     public static final String ERR_MSG_FIELD_DATE_YEAR_SAME = " debe pertenecer al mismo ejercicio.";
+    public static final String ERR_MSG_FORM_NEW_REG = "La forma de captura sólo es para registros nuevos.";
     public static final String ERR_MSG_FORM_EXIST_REG = "La forma de captura sólo es para registros existentes.";
     public static final String ERR_MSG_UNDEF_REG = "Aún no se ha especificado un registro.";
     public static final String ERR_MSG_UNDEF_OPTION = "Aún no se ha especificado una opción.";
