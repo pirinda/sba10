@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import sba.lib.DLibConsts;
 import sba.lib.DLibUtils;
+import sba.lib.gui.DGuiParams;
 import sba.lib.gui.DGuiSession;
 
 /**
@@ -65,6 +66,12 @@ public abstract class DDbRegistry {
 
     public void initPrimaryKey() {
         setPrimaryKey(new int[getPrimaryKey().length]);
+    }
+    
+    public void postInitMembers(final DGuiParams params) {
+        /* To be overriden when specific registry members values are needed on new DDbRegistry objects;
+         * invoked sistematically on getRegistry() class DGuiModule method.
+         */
     }
 
     /*

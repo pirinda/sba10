@@ -19,7 +19,8 @@ public class DGuiParams {
     protected int[] manKey;
     protected boolean mbCopy;
     protected int[] manTypeKey;
-    protected HashMap<Integer, Object> moReferencesMap;
+    protected HashMap<Integer, Object> moParamsMap;
+    protected HashMap<Integer, Object> moPostInitValuesMap;
 
     public DGuiParams() {
         this(DLibConsts.UNDEFINED, DLibConsts.UNDEFINED, null, false);
@@ -63,7 +64,8 @@ public class DGuiParams {
         manKey = key;
         mbCopy = copy;
         manTypeKey = null;
-        moReferencesMap = new HashMap<Integer, Object>();
+        moParamsMap = new HashMap<Integer, Object>();
+        moPostInitValuesMap = new HashMap<Integer, Object>();
     }
 
     public void setType(int n) { mnType = n; }
@@ -78,5 +80,6 @@ public class DGuiParams {
     public boolean isCopy() { return mbCopy; }
     public int[] getTypeKey() { return manTypeKey; }
 
-    public HashMap<Integer, Object> getParamsMap() { return moReferencesMap; }
+    public HashMap<Integer, Object> getParamsMap() { return moParamsMap; }
+    public HashMap<Integer, Object> getPostInitValuesMap() { return moPostInitValuesMap; }
 }

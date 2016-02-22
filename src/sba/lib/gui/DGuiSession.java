@@ -207,8 +207,8 @@ public class DGuiSession implements DGuiController {
     }
 
     @Override
-    public DDbRegistry getRegistry(final int type) {
-        return getModuleByGuiType(type, DLibConsts.UNDEFINED).getRegistry(type);
+    public DDbRegistry getRegistry(final int type, final DGuiParams params) {
+        return getModuleByGuiType(type, DLibConsts.UNDEFINED).getRegistry(type, params);
     }
 
     @Override

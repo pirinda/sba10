@@ -156,7 +156,7 @@ public abstract class DGuiModule implements DGuiController {
     public ImageIcon getModuleIcon() { return moModuleIcon; }
 
     public abstract JMenu[] getMenus();
-    public abstract DDbRegistry getRegistry(final int type);
+    public abstract DDbRegistry getRegistry(final int type, final DGuiParams params);
     public abstract DGuiCatalogueSettings getCatalogueSettings(final int type, final int subtype, final DGuiParams params);
     public abstract DGridPaneView getView(final int type, final int subtype, final DGuiParams params);
     public abstract DGuiOptionPicker getOptionPicker(final int type, final int subtype, final DGuiParams params);
@@ -241,7 +241,7 @@ public abstract class DGuiModule implements DGuiController {
             DGuiUtils.setCursorWait(miClient);
 
             form = getForm(type, subtype, params);
-            registry = getRegistry(type);
+            registry = getRegistry(type, params);
             moLastRegistry = null;
 
             if (params == null) {
@@ -474,7 +474,7 @@ public abstract class DGuiModule implements DGuiController {
         try {
             DGuiUtils.setCursorWait(miClient);
 
-            registry = getRegistry(type);
+            registry = getRegistry(type, null);
             registry.read(miClient.getSession(), pk);
             if (registry.getQueryResultId() != DDbConsts.READ_OK) {
                 throw new Exception(DDbConsts.ERR_MSG_REG_NOT_FOUND);
@@ -540,7 +540,7 @@ public abstract class DGuiModule implements DGuiController {
         DDbRegistry registry = null;
 
         try {
-            registry = getRegistry(type);
+            registry = getRegistry(type, null);
             value = registry.readField(miClient.getSession().getStatement(), pk, field);
         }
         catch (SQLException e) {
@@ -560,7 +560,7 @@ public abstract class DGuiModule implements DGuiController {
         DDbRegistry registry = null;
 
         try {
-            registry = getRegistry(type);
+            registry = getRegistry(type, null);
             registry.saveField(miClient.getSession().getStatement(), pk, field, value);
             result = DDbConsts.SAVE_OK;
         }

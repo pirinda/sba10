@@ -16,7 +16,7 @@ import sba.lib.db.DDbRegistry;
  */
 public interface DGuiController {
 
-    public DDbRegistry getRegistry(final int type);
+    public DDbRegistry getRegistry(final int type, final DGuiParams params);
     public void populateCatalogue(JComboBox comboBox, final int type, final int subtype, final DGuiParams params);
     public void showView(final int type, final int subtype, final DGuiParams params);
     public void showOptionPicker(final int type, final int subtype, final DGuiParams params, final DGuiField field);

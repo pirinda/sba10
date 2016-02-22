@@ -497,7 +497,7 @@ public abstract class DGridPaneForm extends JPanel implements DGridPane, TableMo
             DDbRegistry registry = null;
 
             try {
-                registry = miClient.getSession().getRegistry(mnGridType);
+                registry = miClient.getSession().getRegistry(mnGridType, moFormParams);
                 registry.setFormAction(DGuiConsts.FORM_ACTION_NEW);
 
                 if (moFormParams != null) {
