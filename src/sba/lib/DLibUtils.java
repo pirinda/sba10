@@ -354,6 +354,26 @@ public abstract class DLibUtils {
 
         return belongs;
     }
+    
+    public static int[] cloneKey(final int[] key) {
+        int[] cloned = new int[key.length];
+        
+        for (int i = 0; i < key.length; i++) {
+            cloned[i] = key[i];
+        }
+        
+        return cloned;
+    }
+
+    public static Object[] cloneKey(final Object[] key) {
+        Object[] cloned = new Object[key.length];
+        
+        for (int i = 0; i < key.length; i++) {
+            cloned[i] = key[i];
+        }
+        
+        return cloned;
+    }
 
     public static int parseInt(final String text) {
         int value = 0;
@@ -519,6 +539,14 @@ public abstract class DLibUtils {
         }
 
         return html;
+    }
+
+    public static String textToSql(final String text) {
+        String sql = textTrim(text);
+
+        sql = sql.replaceAll("'", "''");
+
+        return sql;
     }
 
     public static String textProperCase(final String text) {
