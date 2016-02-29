@@ -126,8 +126,10 @@ public class DGuiConsts {
     public static final String ERR_MSG_FIELD_REQ = "Se debe especificar un valor para el campo ";
     public static final String ERR_MSG_FIELD_REQ_NOT = "No se debe especificar un valor para el campo ";
     public static final String ERR_MSG_FIELD_REQ_EQUAL = "El valor de los siguientes campos debe ser igual: ";
+    public static final String ERR_MSG_FIELD_REQ_EQUAL_NOT = "El valor de los siguientes campos debe ser diferente: ";
     public static final String ERR_MSG_FIELD_VAL_ = "El valor del campo ";
     public static final String ERR_MSG_FIELD_VAL_EQUAL = " debe ser igual a ";
+    public static final String ERR_MSG_FIELD_VAL_EQUAL_NOT = " debe ser diferente a ";
     public static final String ERR_MSG_FIELD_VAL_LESS = " debe ser menor a ";
     public static final String ERR_MSG_FIELD_VAL_LESS_EQUAL = " debe ser menor o igual a ";
     public static final String ERR_MSG_FIELD_VAL_GREAT = " debe ser mayor a ";
