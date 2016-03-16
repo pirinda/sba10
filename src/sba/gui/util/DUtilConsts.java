@@ -80,11 +80,14 @@ public abstract class DUtilConsts {
 
     public static final String FILE_NAME_CFG = "sba.xml";
     public static final String ALL = "(TODOS)";
+    public static final String ALL_F = "(TODAS)";
     public static final String NON_APPLYING = "(N/A)";
     public static final String OPEN_BALANCE = "(SALDO INICIAL)";
     public static final String PAY_ADVANCE = "(ANTICIPO)";
     public static final String HEADQUARTERS_BRA = "MATRIZ";
     public static final String HEADQUARTERS_ADD = "OFICIAL";
+    public static final String WITH = "con";
+    public static final String WITHOUT = "sin";
     public static final String ACTION_KEY = "[F9]";
 
     public static final String TXT_FISCAL_ID = "RFC";
