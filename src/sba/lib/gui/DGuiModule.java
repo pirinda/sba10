@@ -298,7 +298,7 @@ public abstract class DGuiModule implements DGuiController {
         catch (IllegalAccessException e) {
             DLibUtils.showException(this, e);
         }
-        catch (Exception e) {
+         catch (Exception e) {
             DLibUtils.showException(this, e);
         }
         finally {
