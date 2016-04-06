@@ -133,6 +133,8 @@ public abstract class DUtilConsts {
     public static final String TXT_LOG = "Bitácora";
     public static final String TXT_TP = "Tipo";
     public static final String TXT_ST = "Status";
+    public static final String TXT_OPEN = "Abrir";
+    public static final String TXT_CLOSE = "Cerrar";
 
     public static final String TTT_DOC_ST_PREV = "Enviar el documento al estado anterior";
     public static final String TTT_DOC_ST_NEXT = "Enviar el documento al estado siguiente";
