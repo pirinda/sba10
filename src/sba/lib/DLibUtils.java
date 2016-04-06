@@ -28,6 +28,7 @@ public abstract class DLibUtils {
 
     public static final DecimalFormat DecimalFormatInteger = new DecimalFormat("#,##0");
     public static final DecimalFormat DecimalFormatIntegerRaw = new DecimalFormat("#0");
+    public static final DecimalFormat DecimalFormatCalendarDay = new DecimalFormat("00");
     public static final DecimalFormat DecimalFormatCalendarMonth = new DecimalFormat("00");
     public static final DecimalFormat DecimalFormatCalendarYear = new DecimalFormat("0000");
     public static final DecimalFormat DecimalFormatValue0D = new DecimalFormat("#,##0");
