@@ -608,6 +608,19 @@ public abstract class DLibUtils {
         return text;
     }
 
+    public static String validateSafePath(final String path) throws Exception {
+        String text = new String("\\/:*?\"<>|");
+        char[] chars = text.toCharArray();
+        
+        for (char c : chars) {
+            if (path.contains("" + c)) {
+                throw new Exception("No se permiten los caracteres: " + text);
+            }
+        }
+
+        return text;
+    }
+
     public static ImageIcon convertBlobToImageIcon(final Blob blob) throws SQLException, IOException {
         int i = 0;
         int bytesRead = 0;
