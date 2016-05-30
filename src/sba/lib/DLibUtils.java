@@ -618,7 +618,7 @@ public abstract class DLibUtils {
             }
         }
 
-        return text;
+        return path;
     }
 
     public static ImageIcon convertBlobToImageIcon(final Blob blob) throws SQLException, IOException {
