@@ -84,6 +84,29 @@ public abstract class DGuiUtils {
         }
     }
 
+    public static void locateItem(final JComboBox comboBox, final String value) {
+        boolean located = false;
+        DGuiItem item = null;
+
+        if (comboBox.getItemCount() > 0) {
+            if (!value.isEmpty()) {
+                for (int i = 0; i < comboBox.getItemCount(); i++) {
+                    item = (DGuiItem) comboBox.getItemAt(i);
+
+                    if (value.compareTo(item.getItem()) == 0) {
+                        comboBox.setSelectedIndex(i);
+                        located = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!located) {
+                comboBox.setSelectedIndex(0);
+            }
+        }
+    }
+
     public static void locateItem(final JList list, final int[] key) {
         boolean located = false;
         DGuiItem item = null;
