@@ -19,6 +19,7 @@ public final class DGuiCatalogueSettings {
     private boolean mbComplementApplying;
     private int mnComplementDataType;
     private boolean mbCodeApplying;
+    private boolean mbCodeVisible;
     private boolean mbDateApplying;
     private boolean mbValueApplying;
     private boolean mbSelectionItemApplying;
@@ -45,6 +46,7 @@ public final class DGuiCatalogueSettings {
         mbComplementApplying = complementDataType != DLibConsts.UNDEFINED;
         mnComplementDataType = complementDataType;
         mbCodeApplying = false;
+        mbCodeVisible = true;
         mbDateApplying = false;
         mbValueApplying = false;
         mbSelectionItemApplying = true;
@@ -57,6 +59,7 @@ public final class DGuiCatalogueSettings {
     public void setComplementApplying(boolean applying) { mbComplementApplying = applying; }
     public void setComplementDataType(int type) { mnComplementDataType = type; }
     public void setCodeApplying(boolean applying) { mbCodeApplying = applying; }
+    public void setCodeVisible(boolean visible) { mbCodeVisible = visible; }
     public void setDateApplying(boolean applying) { mbDateApplying = applying; }
     public void setValueApplying(boolean applying) { mbValueApplying = applying; }
     public void setSelectionItemApplying(boolean b) { mbSelectionItemApplying = b; }
@@ -68,8 +71,14 @@ public final class DGuiCatalogueSettings {
     public boolean isComplementApplying() { return mbComplementApplying; }
     public int getComplementDataType() { return mnComplementDataType; }
     public boolean isCodeApplying() { return mbCodeApplying; }
+    public boolean isCodeVisible() { return mbCodeVisible; }
     public boolean isDateApplying() { return mbDateApplying; }
     public boolean isValueApplying() { return mbValueApplying; }
     public boolean isSelectionItemApplying() { return mbSelectionItemApplying; }
     public String getSql() { return msSql; }
+    
+    public void setCodeSettings(final boolean applying, final boolean visible) {
+        mbCodeApplying = applying;
+        mbCodeVisible = visible;
+    }
 }

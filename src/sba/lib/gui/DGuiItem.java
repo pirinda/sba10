@@ -18,6 +18,7 @@ public class DGuiItem {
     protected String msItem;
     protected Object moComplement;
     protected String msCode;
+    private boolean mbCodeVisible;
     protected Date mtDate;
     protected double mdValue;
 
@@ -43,6 +44,7 @@ public class DGuiItem {
         msItem = item;
         moComplement = complement;
         msCode = "";
+        mbCodeVisible = true;
         mtDate = null;
         mdValue = 0;
     }
@@ -52,6 +54,7 @@ public class DGuiItem {
     public void setItem(String item) { msItem = item; }
     public void setComplement(Object complement) { moComplement = complement; }
     public void setCode(String code) { msCode = code; }
+    public void setCodeVisible(boolean visible) { mbCodeVisible = visible; }
     public void setDate(Date t) { mtDate = t; }
     public void setValue(double d) { mdValue = d; }
 
@@ -60,11 +63,12 @@ public class DGuiItem {
     public String getItem() { return msItem; }
     public Object getComplement() { return moComplement; }
     public String getCode() { return msCode; }
+    public boolean isCodeVisible() { return mbCodeVisible; }
     public Date getDate() { return mtDate; }
     public double getValue() { return mdValue; }
 
     @Override
     public String toString() {
-        return msItem + (msCode.length() == 0 ? "" : " (" + msCode + ")");
+        return msItem + (!msCode.isEmpty() && mbCodeVisible ? " (" + msCode + ")" : "");
     }
 }

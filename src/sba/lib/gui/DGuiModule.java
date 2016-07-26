@@ -41,7 +41,7 @@ public abstract class DGuiModule implements DGuiController {
     protected DGuiClient miClient;
     protected int mnModuleType;
     protected int mnModuleSubtype;
-    protected JMenu[] moMenus;
+    protected JMenu[] maMenus;
     protected DDbRegistry moLastRegistry;
     protected HashMap<Integer, DGuiForm> moUserFormsMap;
     protected ImageIcon moModuleIcon;
@@ -50,7 +50,7 @@ public abstract class DGuiModule implements DGuiController {
         miClient = client;
         mnModuleType = type;
         mnModuleSubtype = subtype;
-        moMenus = null;
+        maMenus = null;
         moLastRegistry = null;
         moUserFormsMap = null;
         moModuleIcon = null;
@@ -425,6 +425,8 @@ public abstract class DGuiModule implements DGuiController {
                 if (settings.isCodeApplying()) {
                     item.setCode(resultSet.getString(DDbConsts.FIELD_CODE));
                 }
+
+                item.setCodeVisible(settings.isCodeVisible());
 
                 if (settings.isDateApplying()) {
                     item.setDate(resultSet.getDate(DDbConsts.FIELD_DATE));
