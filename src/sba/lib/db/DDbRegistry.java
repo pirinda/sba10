@@ -24,6 +24,9 @@ public abstract class DDbRegistry {
     public static final int FIELD_NAME = 1002;
     public static final int FIELD_NAME_ABBR = 1003;
     public static final int FIELD_BASE = 2000;
+    public static final int FIELD_TS_USR = 2101;
+    public static final int FIELD_TS_USR_INS = 2111;
+    public static final int FIELD_TS_USR_UPD = 2112;
 
     protected int mnRegistryType;
     protected boolean mbRegistryNew;
@@ -201,6 +204,15 @@ public abstract class DDbRegistry {
             case FIELD_NAME_ABBR:
                 msSql += "name_abbr ";
                 break;
+            case FIELD_TS_USR:
+                msSql += "ts_usr ";
+                break;
+            case FIELD_TS_USR_INS:
+                msSql += "ts_usr_ins ";
+                break;
+            case FIELD_TS_USR_UPD:
+                msSql += "ts_usr_upd ";
+                break;
             default:
                 throw new Exception(DLibConsts.ERR_MSG_OPTION_UNKNOWN);
         }
@@ -217,6 +229,11 @@ public abstract class DDbRegistry {
                 case FIELD_NAME:
                 case FIELD_NAME_ABBR:
                     value = resultSet.getString(1);
+                    break;
+                case FIELD_TS_USR:
+                case FIELD_TS_USR_INS:
+                case FIELD_TS_USR_UPD:
+                    value = resultSet.getTimestamp(1);
                     break;
                 default:
             }

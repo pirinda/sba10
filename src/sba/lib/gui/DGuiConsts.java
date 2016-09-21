@@ -82,6 +82,8 @@ public class DGuiConsts {
     public static final int PARAM_REQ_STK = 43;
     public static final int PARAM_ITEM = 51;
     public static final int PARAM_ROWS = 101;
+    public static final int PARAM_REGS_ACT = 201; // only active registries
+    public static final int PARAM_REGS_ALL = 202; // all registries
 
     public static final String TXT_BTN_FIND = "Buscar";
     public static final String TXT_BTN_SAVE = "Guardar";
