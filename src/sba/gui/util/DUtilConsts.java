@@ -40,6 +40,9 @@ public abstract class DUtilConsts {
     public static final int SUPP = 1;
     public static final int SUPP_PEND = 2;
 
+    public static final int AUD = 1;
+    public static final int AUD_PEND = 2;
+
     public static final int BAL = 1;
     public static final int BAL_CY = 2;
 
