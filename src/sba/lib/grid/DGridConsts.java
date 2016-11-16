@@ -152,4 +152,5 @@ public abstract class DGridConsts {
     public static final String ERR_MSG_VAL_NOT_FOUND = "El valor buscado no fue encontrado.";
     public static final String ERR_MSG_ROW_TYPE_DATA = "El renglón no es de datos.";
     public static final String ERR_MSG_ROW_TYPE_SUM = "El renglón no es de suma.";
+    public static final String ERR_MSG_PREFS_VIEW = "Ocurrió una excepción al procesar las preferencias de la vista, se desplegará en su configuración predeterminada.";
 }

@@ -533,7 +533,10 @@ public abstract class DGridPaneView extends JPanel implements DGridPane, ListSel
             }
         }
         catch (Exception e) {
-            DLibUtils.showException(this, e);
+            DLibUtils.printException(this, e);
+            miClient.showMsgBoxWarning(DGridConsts.ERR_MSG_PREFS_VIEW);
+            miUserGui = null;   // reset grid's user preferences
+            populateGrid(DGridConsts.REFRESH_MODE_RESET);
         }
     }
 
@@ -949,7 +952,15 @@ public abstract class DGridPaneView extends JPanel implements DGridPane, ListSel
             DLibUtils.showException(this, e);
         }
         finally {
-            jtTable.getRowSorter().setSortKeys(miSortKeysList);
+            try {
+                jtTable.getRowSorter().setSortKeys(miSortKeysList);
+            }
+            catch (Exception e) {
+                DLibUtils.printException(this, e);
+                miClient.showMsgBoxWarning(DGridConsts.ERR_MSG_PREFS_VIEW);
+                miUserGui = null;   // reset grid's user preferences
+                populateGrid(DGridConsts.REFRESH_MODE_RESET);
+            }
 
             if (dataAvailable) {
                 jbGridSaveCsv.setEnabled(true);
