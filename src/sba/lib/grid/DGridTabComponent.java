@@ -21,7 +21,7 @@ import sba.lib.img.DImgConsts;
 
 /**
  *
- * @author Sergio A. Flores
+ * @author Sergio Flores
  */
 public class DGridTabComponent extends JPanel implements ChangeListener {
 

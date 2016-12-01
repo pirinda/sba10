@@ -14,7 +14,7 @@ import java.util.Set;
 
 /**
  *
- * @author Sergio A. Flores
+ * @author Sergio Flores
  */
 public abstract class DLibTimeUtils {
 
@@ -247,10 +247,66 @@ public abstract class DLibTimeUtils {
      * Check if Date belongs to period and other validation methods
      */
 
+    /**
+     * Checks if date belongs to provided period.
+     * @param date Date about to be evaluated.
+     * @param periodStart Period's starting date.
+     * @param periodEnd Period's ending date.
+     * @return <code>true</code> if date belongs to provided period.
+     */
     public static boolean isBelongingToPeriod(final Date date, final Date periodStart, final Date periodEnd) {
-        java.util.Date curDate = convertToDateOnly(date);
+        boolean belongs = false;
+        java.util.Date tPeriodStart = convertToDateOnly(periodStart);
+        java.util.Date tPeriodEnd = convertToDateOnly(periodEnd);
+        java.util.Date tDate = convertToDateOnly(date);
+        
+        if (!tPeriodStart.after(tPeriodEnd)) { // check that period is closed
+            belongs = !(tDate.before(convertToDateOnly(periodStart)) || tDate.after(convertToDateOnly(periodEnd)));
+        }
 
-        return !(curDate.before(convertToDateOnly(periodStart)) || curDate.after(convertToDateOnly(periodEnd)));
+        return belongs;
+    }
+
+    /**
+     * Checks if time span belongs to provided period.
+     * @param spanStart Time-span's starting date about to be evaluated.
+     * @param spanEnd Time-span's ending date about to be evaluated, when null means that time span is unlimited.
+     * @param periodStart Period's starting date.
+     * @param periodEnd Period's ending date.
+     * @return <code>true</code> if time span belongs to provided period.
+     */
+    public static boolean isBelongingToPeriod(final Date spanStart, final Date spanEnd, final Date periodStart, final Date periodEnd) {
+        boolean belongs = false;
+        java.util.Date spaSta = convertToDateOnly(spanStart);
+        java.util.Date spaEnd = spanEnd == null ? null : convertToDateOnly(spanEnd);
+        java.util.Date perSta = convertToDateOnly(periodStart);
+        java.util.Date perEnd = convertToDateOnly(periodEnd);
+        
+        if ((spaEnd == null || !spaSta.after(spaEnd)) && !perSta.after(perEnd)) { // check that time span and period are closed
+            if (spaEnd == null) {
+                // time span is unlimited
+                
+                // time span belongs if:
+                // a) time-span' start is less or equal than period' end.
+                belongs = spaSta.before(perEnd) || isSameDate(spaSta, perEnd);
+            }
+            else {
+                // time span is limited
+                
+                // time span belongs if:
+                // a) time-span' start is less or equal than period' start and time-span' end is greater or equal than period' start; or
+                // b) time-span' start is greater or equal than period' start and time-span' start is less or equal than period' end.
+                
+                if ((spaSta.before(perSta) || isSameDate(spaSta, perSta)) && (isSameDate(spaEnd, perSta) || spaEnd.after(perSta))) {
+                    belongs = true;
+                }
+                else if ((spaSta.after(perSta) || isSameDate(spaSta, perSta)) && (spaSta.before(perEnd) || isSameDate(spaSta, perEnd))) {
+                    belongs = true;
+                }
+            }
+        }
+        
+        return belongs;
     }
 
     public static boolean isBelongingToPeriod(final Date date, final int year, final int month) {

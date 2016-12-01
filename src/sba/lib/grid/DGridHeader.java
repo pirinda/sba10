@@ -12,7 +12,7 @@ import sba.lib.DLibUtils;
 
 /**
  *
- * @author Sergio A. Flores
+ * @author Sergio Flores
  */
 public final class DGridHeader extends JTableHeader {
 

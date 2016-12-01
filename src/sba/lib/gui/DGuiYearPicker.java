@@ -15,7 +15,7 @@ import sba.lib.DLibTimeUtils;
 
 /**
  *
- * @author Sergio A. Flores
+ * @author Sergio Flores
  */
 public class DGuiYearPicker extends JDialog implements DGuiOptionPicker, ActionListener {
 

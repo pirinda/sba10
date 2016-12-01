@@ -18,7 +18,7 @@ import sba.lib.DLibTimeUtils;
 
 /**
  *
- * @author Sergio A. Flores
+ * @author Sergio Flores
  */
 public class DGuiDateRangePicker extends JDialog implements DGuiOptionPicker, ActionListener {
 
