@@ -279,6 +279,9 @@ public abstract class DGuiUtils {
         else if (name.endsWith(":*")) {
             name = name.substring(0, name.length() - 2);
         }
+        else if (name.endsWith(": *")) {
+            name = name.substring(0, name.length() - 3);
+        }
 
         return name;
     }
