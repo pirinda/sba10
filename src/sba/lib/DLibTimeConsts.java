@@ -14,4 +14,5 @@ public abstract class DLibTimeConsts {
     public static final int YEAR_MAX = 2100;
     public static final int MONTH_MIN = 1;
     public static final int MONTH_MAX = 12;
+    public static final int MONTHS = 12;
 }
