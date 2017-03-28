@@ -66,7 +66,7 @@ public class DLibValueProration {
                 }
             }
             
-            // adjust proration, if necesary:
+            // adjust proration, if necessary:
             
             double difference = DLibUtils.round(prorateTotal - value, decimals);
             
