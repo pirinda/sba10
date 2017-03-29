@@ -6,29 +6,29 @@
 package sba.lib;
 
 /**
- * Allows control of an individual value to be prorated.
+ * Allows control of an individual base value to be used in prorations.
  * @author Sergio Flores
  */
 public class DLibValue {
     
     private final int[] mnaKey;
-    private final double mdValueSource;
+    private final double mdValueBase;
     private double mdValueProrated;
     
-    public DLibValue(int[] key, double valueSource) {
+    public DLibValue(int[] key, double valueBase) {
         mnaKey = key;
-        mdValueSource = valueSource;
+        mdValueBase = valueBase;
         mdValueProrated = 0;
     }
     
     public void setValueProrated(double valueProrated) { mdValueProrated = valueProrated; }
     
     public int[] getKey() { return mnaKey; }
-    public double getValueSource() { return mdValueSource; }
+    public double getValueBase() { return mdValueBase; }
     public double getValueProrated() { return mdValueProrated; }
     
     @Override
     public String toString() {
-        return "# " + DLibUtils.textKey(mnaKey) + ", <" + mdValueSource + ">: <" + mdValueProrated + ">";
+        return "# " + DLibUtils.textKey(mnaKey) + ", <" + mdValueBase + ">: <" + mdValueProrated + ">";
     }
 }

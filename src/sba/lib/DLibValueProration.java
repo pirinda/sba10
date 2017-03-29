@@ -34,22 +34,22 @@ public class DLibValueProration {
     }
     
     /**
-     * Prorates value into array of values with decimals constraint.
+     * Prorates given value into array of values with decimals constraint.
      * @param value Value to be prorated into array of values.
-     * @param decimals Constraint of number of decimals of proration.
-     * @throws Exception if there is not any base for proration when total source value is zero.
+     * @param decimals Constraint of number of decimals for proration.
+     * @throws Exception if there is not any base for proration when total base value is zero.
      */
     public void prorateValue(double value, int decimals) throws Exception {
-        // sum source values and reset prorated values:
+        // sum base values and reset prorated values:
         
-        double sourceTotal = 0;
+        double baseTotal = 0;
         
         for (DLibValue v : maValues) {
-            sourceTotal += v.getValueSource();
+            baseTotal += v.getValueBase();
             v.setValueProrated(0);
         }
         
-        if (sourceTotal == 0) {
+        if (baseTotal == 0) {
             // no base for proration:
             
             throw new Exception(DLibConsts.ERR_MSG_UTILS_QTY_INVALID);
@@ -62,12 +62,12 @@ public class DLibValueProration {
             DLibValue valueGreater = null;
 
             for (DLibValue v : maValues) {
-                prorate = DLibUtils.round(value * (v.getValueSource() / sourceTotal), decimals);
+                prorate = DLibUtils.round(value * (v.getValueBase() / baseTotal), decimals);
                 v.setValueProrated(prorate);
                 
                 prorateTotal = DLibUtils.round(prorateTotal + prorate, decimals);
 
-                if (valueGreater == null || v.getValueSource() > valueGreater.getValueSource()) {
+                if (valueGreater == null || v.getValueBase() > valueGreater.getValueBase()) {
                     valueGreater = v;
                 }
             }
