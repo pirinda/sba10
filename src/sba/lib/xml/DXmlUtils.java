@@ -39,6 +39,7 @@ public abstract class DXmlUtils {
     }
 
     public static String readXml(final String filePath) throws FileNotFoundException, UnsupportedEncodingException, IOException, Exception {
+        boolean firstLine = true;
         String line = "";
         String xml = "";
         BufferedReader br = null;
@@ -51,6 +52,11 @@ public abstract class DXmlUtils {
                 break;
             }
             else {
+                if (firstLine) {
+                    // skip odd characters at the begining, if any:
+                    line = line.substring(line.indexOf("<"));
+                    firstLine = false;
+                }
                 xml += line;
             }
         }
