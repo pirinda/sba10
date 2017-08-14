@@ -8,16 +8,23 @@ package sba.lib.xml;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.util.Vector;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -66,6 +73,32 @@ public abstract class DXmlUtils {
         return xml;
     }
 
+    /**
+     * Transforms XML with XSLT.
+     * @param xml XML to transform.
+     * @param xsltUrl XSLT's URL.
+     * @return Transformed XML.
+     * @throws Exception 
+     */
+    public static String transformXml(final String xml, final String xsltUrl) throws Exception {
+        OutputStream outputStream = new ByteArrayOutputStream(xml.length());
+        
+        // load XSLT file from its URL:
+        URL url = new URL(xsltUrl);
+        
+        // load XML:
+        StreamSource streamSource = new StreamSource(new ByteArrayInputStream(xml.getBytes()));
+ 
+        // create XSLT processor that will generate original string according to XSLT rules:
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer(new StreamSource(url.openStream()));
+ 
+        // apply XSLT rules to XML, write result into output:
+        transformer.transform(streamSource, new StreamResult(outputStream));
+        
+        return outputStream.toString();
+    }
+    
     public static Document parseDocument(final String xml) throws ParserConfigurationException, SAXException, IOException, Exception {
         return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(xml.getBytes("UTF-8")));
     }
