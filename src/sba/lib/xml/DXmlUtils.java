@@ -81,20 +81,51 @@ public abstract class DXmlUtils {
      * @throws Exception 
      */
     public static String transformXml(final String xml, final String xsltUrl) throws Exception {
-        OutputStream outputStream = new ByteArrayOutputStream(xml.length());
+        String xmlUtf8 = new String(xml.getBytes("UTF-8"));
+        /*  XXX added due to character set issue that breaks transformation of XML
+        System.out.println(SXmlUtils.class.getName() + ":");
+        System.out.println("XML : <" + xml + ">");
+        System.out.println("XML : <" + xmlUtf8 + ">");
+        System.out.println("XSLT URL : <" + xsltUrl + ">");
+        */
+        OutputStream outputStream = new ByteArrayOutputStream(xmlUtf8.length());
+        
+        /*  XXX added due to character set issue that breaks transformation of XML
+        System.out.println("OutputStream instantiated!");
+        */
         
         // load XSLT file from its URL:
         URL url = new URL(xsltUrl);
         
+        /*  XXX added due to character set issue that breaks transformation of XML
+        System.out.println("URL instantiated!");
+        */
+        
         // load XML:
-        StreamSource streamSource = new StreamSource(new ByteArrayInputStream(xml.getBytes()));
+        StreamSource streamSource = new StreamSource(new ByteArrayInputStream(xmlUtf8.getBytes("UTF-8")));
  
+        /*  XXX added due to character set issue that breaks transformation of XML
+        System.out.println("StreamSource instantiated!");
+        */
+        
         // create XSLT processor that will generate original string according to XSLT rules:
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer(new StreamSource(url.openStream()));
  
+        /*  XXX added due to character set issue that breaks transformation of XML
+        System.out.println("Transformer instantiated!");
+        */
+        
         // apply XSLT rules to XML, write result into output:
         transformer.transform(streamSource, new StreamResult(outputStream));
+        
+        /*  XXX added due to character set issue that breaks transformation of XML
+        System.out.println("transformer.transform() invoked!");
+        */
+        
+        /*  XXX added due to character set issue that breaks transformation of XML
+        System.out.println("outputStream.toString(): <" + outputStream.toString() + ">");
+        */
         
         return outputStream.toString();
     }
