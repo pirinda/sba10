@@ -123,6 +123,7 @@ public abstract class DUtilConsts {
     public static final String TXT_IMPORT = "Importar";
     public static final String TXT_COMPANY = "Empresa";
     public static final String TXT_BRANCH = "Sucursal";
+    public static final String TXT_BRANCH_ADD = "Domicilio";
     public static final String TXT_BRANCH_CSH = "Cuenta de dinero";
     public static final String TXT_BRANCH_CSH_PLR = "Cuentas de dinero";
     public static final String TXT_BRANCH_WAH = "Almacén de bienes";
