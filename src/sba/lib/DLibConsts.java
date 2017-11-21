@@ -35,4 +35,7 @@ public abstract class DLibConsts {
     public static final String ERR_MSG_ARGS_MANY = "Demasiados argumentos.";
     public static final String ERR_MSG_RPN_ARGS_FEW = "Insuficientes argumentos para RPN.";
     public static final String ERR_MSG_RPN_ARGS_MANY = "Demasiados argumentos para RPN.";
+    
+    public static final String ERR_MSG_UTILS_KEY_EXISTS = "¡La clave ya existe!";
+    public static final String ERR_MSG_UTILS_QTY_INVALID = "¡La cantidad es inválida!";
 }

@@ -5,9 +5,13 @@
 
 package sba.lib;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Method;
 import java.math.RoundingMode;
 import java.sql.Blob;
@@ -17,6 +21,8 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.TimeZone;
 import java.util.Vector;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -1145,5 +1151,50 @@ public abstract class DLibUtils {
                     throw new Exception(DLibConsts.ERR_MSG_ARGS_MANY);
             }
         }
+    }
+    
+    /**
+     * Zip a text in byte array format.
+     * 
+     * @param text text to zip.
+     * @return text in byte array format.
+     * @throws Exception 
+     */
+    public static byte[] zip(String text) throws Exception {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream(text.length());
+        GZIPOutputStream gzip = new GZIPOutputStream(bos);
+        
+        gzip.write(text.getBytes());
+        gzip.close();
+        
+        byte[] textZip = bos.toByteArray();
+        bos.close();
+        
+        return textZip;
+    }
+    
+    /**
+     * Unzip a byte array in a string
+     * 
+     * @param array byte array to unzip.
+     * @return text as string.
+     * @throws Exception 
+     */
+    public static String unzip(byte[] array) throws Exception {
+        String line = "";
+        ByteArrayInputStream bis = new ByteArrayInputStream(array);
+        GZIPInputStream gzip = new GZIPInputStream(bis);
+        BufferedReader br = new BufferedReader(new InputStreamReader(gzip, "UTF-8"));
+        StringBuilder sb = new StringBuilder();
+
+        while ((line = br.readLine()) != null) {
+            sb.append(line);
+        }
+
+        br.close();
+        gzip.close();
+        bis.close();
+        
+        return sb.toString();
     }
 }

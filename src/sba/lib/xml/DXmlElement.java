@@ -73,4 +73,16 @@ public class DXmlElement implements java.io.Serializable {
 
         return attribute;
     }
+
+    public Vector<DXmlElement> getElements(final String name) {
+        Vector<DXmlElement> elements = new Vector<DXmlElement>();
+
+        for (DXmlElement element : mvXmlElements) {
+            if (name.compareTo(element.getName()) == 0) {
+                elements.add(element);
+            }
+        }
+
+        return elements;
+    }
 }
