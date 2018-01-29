@@ -63,8 +63,12 @@ public abstract class DLibUtils {
     public static final SimpleDateFormat FileDateFormatDatetime = new SimpleDateFormat("yyyyMMdd HHmmss");
     public static final HashMap<Character, String> XmlEntityNamesMap = new HashMap<Character, String>();
     public static final HashMap<Character, String> HtmlEntityNamesMap = new HashMap<Character, String>();
+    public static final char[] RandomKeyChars = new char[] { 
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 
+        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '9' }; // 62 choices, but 63 characters actually: the last one must be repeated
 
-    private static final double MAX_VALUE = 999999999.99;    // 999,999,999.99
+    private static final double MAX_VALUE = 999999999.99; // 999,999,999.99
 
     static {
         RoundingDecimalFormat.setRoundingMode(RoundingMode.HALF_UP);
@@ -625,6 +629,21 @@ public abstract class DLibUtils {
         }
 
         return path;
+    }
+    
+    /**
+     * Generates random key of requested length made up with characters A-Z, a-z, 0-9, and '+' and '-'.
+     * @param length Requested length.
+     * @return Random key.
+     */
+    public static String generateRandomKey(final int length) {
+        String key = "";
+        
+        for (int i = 0; i < length; i++) {
+            key += RandomKeyChars[(int) (Math.random() / (1d / (RandomKeyChars.length - 1)))];
+        }
+        
+        return key;
     }
 
     public static ImageIcon convertBlobToImageIcon(final Blob blob) throws SQLException, IOException {
