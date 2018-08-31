@@ -46,10 +46,10 @@ public abstract class DXmlDocument extends DXmlElement {
         String aux = "";
         String xml = "";
 
-        xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n";
+        xml = DXmlConsts.XML_HEADER;
 
         if (mbAddDefaultHeader) {
-            xml += "<!-- Copyright 2010-2015 Sergio Abraham Flores Gutiérrez. All rights reserved. -->\n";
+            xml += "<!-- Copyright Sergio Abraham Flores Gutiérrez. All rights reserved. -->\n";
         }
 
         xml += "<" + msName + (!mbAddDefaultHeader ? "" : " xmlns=\"http://www.mysba.com\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");

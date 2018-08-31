@@ -11,6 +11,8 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import org.joda.time.DateTime;
+import org.joda.time.Period;
 
 /**
  *
@@ -393,5 +395,25 @@ public abstract class DLibTimeUtils {
 
     public static long getHoursDiff(final Date newer, final Date older) {
         return (newer.getTime() - older.getTime()) / (1000L * 60L * 60L);
+    }
+    
+    /**
+     * Formats date as age in format '9 y, 9 m'. 'y' stands for year, and 'm' for month.
+     * @param date Base date.
+     * @param today Today.
+     * @return Formatted string.
+     */
+    public static String formatAge(final Date date, final Date today) {
+        String string = "";
+        
+        if (date != null) {
+            DateTime start = new DateTime(date);
+            DateTime end = new DateTime(today);
+            Period period = new Period(start, end);
+            
+            string = "" + period.getYears() + " a, " + period.getMonths() + " m";
+        }
+        
+        return string;
     }
 }

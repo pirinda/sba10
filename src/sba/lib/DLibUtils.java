@@ -437,6 +437,10 @@ public abstract class DLibUtils {
         return parseDouble(RoundingDecimalFormat.format(value));
     }
 
+    public static double roundAmount(final double value) {
+        return round(value, getDecimalFormatAmount().getMaximumFractionDigits());
+    }
+
     public static String textKey(final int[] key)  {
         String textKey = "";
 

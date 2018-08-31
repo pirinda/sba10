@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -80,7 +81,7 @@ public abstract class DXmlUtils {
      * @return Transformed XML.
      * @throws Exception 
      */
-    public static String transformXml(final String xml, final String xsltUrl) throws Exception {
+    public static String transformXmlFromUrl(final String xml, final String xsltUrl) throws Exception {
         String xmlUtf8 = new String(xml.getBytes("UTF-8"));
         /*  XXX added due to character set issue that breaks transformation of XML
         System.out.println(SXmlUtils.class.getName() + ":");
@@ -111,6 +112,63 @@ public abstract class DXmlUtils {
         // create XSLT processor that will generate original string according to XSLT rules:
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer(new StreamSource(url.openStream()));
+ 
+        /*  XXX added due to character set issue that breaks transformation of XML
+        System.out.println("Transformer instantiated!");
+        */
+        
+        // apply XSLT rules to XML, write result into output:
+        transformer.transform(streamSource, new StreamResult(outputStream));
+        
+        /*  XXX added due to character set issue that breaks transformation of XML
+        System.out.println("transformer.transform() invoked!");
+        */
+        
+        /*  XXX added due to character set issue that breaks transformation of XML
+        System.out.println("outputStream.toString(): <" + outputStream.toString() + ">");
+        */
+        
+        return outputStream.toString();
+    }
+    
+    /**
+     * Transforms XML with XSLT.
+     * @param xml XML to transform.
+     * @param xsltFile XSLT's file.
+     * @return Transformed XML.
+     * @throws Exception 
+     */
+    public static String transformXmlFromFile(final String xml, final String xsltFile) throws Exception {
+        String xmlUtf8 = new String(xml.getBytes("UTF-8"));
+        /*  XXX added due to character set issue that breaks transformation of XML
+        System.out.println(SXmlUtils.class.getName() + ":");
+        System.out.println("XML : <" + xml + ">");
+        System.out.println("XML : <" + xmlUtf8 + ">");
+        System.out.println("XSLT URL : <" + xsltUrl + ">");
+        */
+        OutputStream outputStream = new ByteArrayOutputStream(xmlUtf8.length());
+        
+        /*  XXX added due to character set issue that breaks transformation of XML
+        System.out.println("OutputStream instantiated!");
+        */
+        
+        // load XSLT file from its URL:
+        File file = new File(xsltFile);
+        
+        /*  XXX added due to character set issue that breaks transformation of XML
+        System.out.println("URL instantiated!");
+        */
+        
+        // load XML:
+        StreamSource streamSource = new StreamSource(new ByteArrayInputStream(xmlUtf8.getBytes("UTF-8")));
+ 
+        /*  XXX added due to character set issue that breaks transformation of XML
+        System.out.println("StreamSource instantiated!");
+        */
+        
+        // create XSLT processor that will generate original string according to XSLT rules:
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer(new StreamSource(file));
  
         /*  XXX added due to character set issue that breaks transformation of XML
         System.out.println("Transformer instantiated!");
