@@ -283,13 +283,13 @@ public abstract class DLibUtils {
         return DecimalFormatPercentage4D;
     }
 
-    public static boolean compareKeys(final int[] keyA, final int[] keyB) {
-        if (keyA == null && keyB != null || keyA != null && keyB == null) {
+    public static boolean compareKeys(final int[] a, final int[] b) {
+        if (a == null && b != null || a != null && b == null) {
             return false;
         }
-        else if (keyA.length == keyB.length) {
-            for (int i = 0; i < keyA.length; i++) {
-                if (keyA[i] != keyB[i]) {
+        else if (a.length == b.length) {
+            for (int i = 0; i < a.length; i++) {
+                if (a[i] != b[i]) {
                     return false;
                 }
             }
@@ -298,19 +298,19 @@ public abstract class DLibUtils {
         return false;
     }
 
-    public static boolean compareKeys(final Object keyA, final Object keyB) {
+    public static boolean compareKeys(final Object a, final Object b) {
         Object[] aoKeyA = null;
         Object[] aoKeyB = null;
 
-        if (keyA == null && keyB != null || keyA != null && keyB == null) {
+        if (a == null && b != null || a != null && b == null) {
             return false;
         }
-        if (keyA.getClass() == int[].class && keyB.getClass() == int[].class) {
-            return compareKeys((int[]) keyA, (int[]) keyB);
+        if (a.getClass() == int[].class && b.getClass() == int[].class) {
+            return compareKeys((int[]) a, (int[]) b);
         }
-        else if (keyA.getClass() == Object[].class && keyB.getClass() == Object[].class ) {
-            aoKeyA = (Object[]) keyA;
-            aoKeyB = (Object[]) keyB;
+        else if (a.getClass() == Object[].class && b.getClass() == Object[].class ) {
+            aoKeyA = (Object[]) a;
+            aoKeyB = (Object[]) b;
 
             if (aoKeyA.length == aoKeyB.length) {
                 for (int i = 0; i < aoKeyA.length; i++) {
@@ -439,6 +439,10 @@ public abstract class DLibUtils {
 
     public static double roundAmount(final double value) {
         return round(value, getDecimalFormatAmount().getMaximumFractionDigits());
+    }
+
+    public static boolean compareAmount(final double a, final double b) {
+        return roundAmount(Math.abs(a - b)) < 0.01;
     }
 
     public static String textKey(final int[] key)  {
