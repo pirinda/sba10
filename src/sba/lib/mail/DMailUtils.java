@@ -18,7 +18,7 @@ public abstract class DMailUtils {
      * @param subject
      * @return 
      */
-    public String encodeSubjectUtf8(final String subject) {
+    public static String encodeSubjectUtf8(final String subject) {
         return DMailConsts.SUBJECT_ENC_UTF8_BEGIN + 
                 Base64.getEncoder().encodeToString(subject.getBytes()) + 
                 DMailConsts.SUBJECT_ENC_UTF8_END;
