@@ -40,7 +40,7 @@ public abstract class DGuiUtils {
     }
 
     /**
-     * @param maskErp The following characters can be specified:
+     * @param pattern The following characters can be specified:
      *  y   Any number (Character.isDigit).
      *  M   Any number (Character.isDigit).
      *  d   Any number (Character.isDigit).
@@ -286,7 +286,7 @@ public abstract class DGuiUtils {
         return name;
     }
 
-    public static void pickDate(DGuiDatePicker picker, Date date, DGuiFieldDate field) {
+    public static void pickDate(final DGuiDatePicker picker, final Date date, final DGuiFieldDate field) {
         picker.resetPicker();
         picker.setOption(date);
         picker.setPickerVisible(true);
@@ -297,7 +297,7 @@ public abstract class DGuiUtils {
         }
     }
 
-    public static DGuiValidation validateDateRange(DGuiFieldDate fieldDateStart, DGuiFieldDate fieldDateEnd) {
+    private static DGuiValidation validateDateRange(final DGuiFieldDate fieldDateStart, final DGuiFieldDate fieldDateEnd, final boolean validateYears) {
         Date dateStart = fieldDateStart.getValue();
         Date dateEnd = fieldDateEnd.getValue();
         DGuiValidation validation = new DGuiValidation();
@@ -310,7 +310,7 @@ public abstract class DGuiUtils {
             validation.setMessage("No se ha especificado un valor para la fecha final.");
             validation.setComponent(fieldDateEnd.getComponent());
         }
-        else if (DLibTimeUtils.digestYear(dateStart)[0] != DLibTimeUtils.digestYear(dateEnd)[0]) {
+        else if (validateYears && DLibTimeUtils.digestYear(dateStart)[0] != DLibTimeUtils.digestYear(dateEnd)[0]) {
             validation.setMessage("El año de las fechas inicial y final debe ser el mismo.");
             validation.setComponent(fieldDateStart.getComponent());
         }
@@ -320,6 +320,14 @@ public abstract class DGuiUtils {
         }
 
         return validation;
+    }
+
+    public static DGuiValidation validateDateRange(final DGuiFieldDate fieldDateStart, final DGuiFieldDate fieldDateEnd) {
+        return validateDateRange(fieldDateStart, fieldDateEnd, true);
+    }
+
+    public static DGuiValidation validateDateRangeIgnoreYears(final DGuiFieldDate fieldDateStart, final DGuiFieldDate fieldDateEnd) {
+        return validateDateRange(fieldDateStart, fieldDateEnd, false);
     }
 
     public static boolean computeValidation(final DGuiClient client, final DGuiValidation validation) {
