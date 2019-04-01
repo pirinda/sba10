@@ -35,7 +35,7 @@ public class DMail {
 
     /**
      * @param sender Mail sender.
-     * @param subject Mail subject.
+     * @param subject Mail subject. Subject text can be UTF-8 encoded, if needed, with helper method DMailUtils.encodeSubjectUtf8().
      * @param body Mail body (it is assumed that content type is plain text).
      * @param toRecipients Mail recipients list.
      */
@@ -45,7 +45,7 @@ public class DMail {
 
     /**
      * @param sender Mail sender.
-     * @param subject Mail subject.
+     * @param subject Mail subject. Subject text can be UTF-8 encoded, if needed, with helper method DMailUtils.encodeSubjectUtf8().
      * @param body Mail body (it is assumed that content type is plain text).
      * @param toRecipients Mail recipients list.
      * @param ccRecipients Mail carbon copy recipients list.
@@ -56,7 +56,7 @@ public class DMail {
 
     /**
      * @param sender Mail sender.
-     * @param subject Mail subject.
+     * @param subject Mail subject. Subject text can be UTF-8 encoded, if needed, with helper method DMailUtils.encodeSubjectUtf8().
      * @param body Mail body (it is assumed that content type is plain text).
      * @param toRecipients Mail recipients list.
      * @param ccRecipients Mail carbon copy recipients list.
@@ -68,7 +68,7 @@ public class DMail {
 
     /**
      * @param sender Mail sender.
-     * @param subject Mail subject.
+     * @param subject Mail subject. Subject text can be UTF-8 encoded, if needed, with helper method DMailUtils.encodeSubjectUtf8().
      * @param body Mail body (it is assumed that content type is plain text).
      * @param contentType  Mail content type (Constants of options defined in class sa.lib.mail.SMailConsts).
      * @param toRecipients Mail recipients list.
