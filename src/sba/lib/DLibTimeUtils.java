@@ -397,6 +397,10 @@ public abstract class DLibTimeUtils {
         return (newer.getTime() - older.getTime()) / (1000L * 60L * 60L);
     }
     
+    public static int countPeriodDays(final Date periodStart, final Date periodEnd) {
+        return (int) getDaysDiff(periodEnd, periodStart) + 1;
+    }
+
     /**
      * Formats date as age in format '9 y, 9 m'. 'y' stands for year, and 'm' for month.
      * @param date Base date.
