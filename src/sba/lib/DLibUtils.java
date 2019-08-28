@@ -367,23 +367,31 @@ public abstract class DLibUtils {
     }
     
     public static int[] cloneKey(final int[] key) {
-        int[] cloned = new int[key.length];
+        int[] clonedKey = null;
         
-        for (int i = 0; i < key.length; i++) {
-            cloned[i] = key[i];
+        if (key != null) {
+            clonedKey = new int[key.length];
+
+            for (int i = 0; i < key.length; i++) {
+                clonedKey[i] = key[i];
+            }
         }
         
-        return cloned;
+        return clonedKey;
     }
 
     public static Object[] cloneKey(final Object[] key) {
-        Object[] cloned = new Object[key.length];
+        Object[] clonedKey = null;
         
-        for (int i = 0; i < key.length; i++) {
-            cloned[i] = key[i];
+        if (key != null) {
+            clonedKey = new Object[key.length];
+            
+            for (int i = 0; i < key.length; i++) {
+                clonedKey[i] = key[i];
+            }
         }
         
-        return cloned;
+        return clonedKey;
     }
 
     public static int parseInt(final String text) {
