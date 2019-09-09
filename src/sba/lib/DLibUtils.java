@@ -340,6 +340,16 @@ public abstract class DLibUtils {
         return false;
     }
 
+    public static boolean belongsTo(final String value, final String[] array) {
+        for (String current : array) {
+            if (current.equals(value)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
     public static boolean belongsTo(final int val, final int[] valArray) {
         boolean belongs = false;
 
