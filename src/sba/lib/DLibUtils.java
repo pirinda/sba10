@@ -482,6 +482,16 @@ public abstract class DLibUtils {
 
         return trimmedText;
     }
+    
+    public static String[] textsTrim(final String[] texts) {
+        String[] trimmedTexts = new String[texts.length];
+        
+        for (int i = 0; i < texts.length; i++) {
+            trimmedTexts[i] = textTrim(texts[i]);
+        }
+        
+        return trimmedTexts;
+    }
 
     public static String textLeft(final String text, final int count) {
         return text.length() <= count ? text : text.substring(0, count);
