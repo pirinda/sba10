@@ -284,6 +284,9 @@ public abstract class DLibUtils {
     }
 
     public static boolean compareKeys(final int[] a, final int[] b) {
+        if (a == null && b == null) {
+            return true;
+        }
         if (a == null && b != null || a != null && b == null) {
             return false;
         }
@@ -302,6 +305,9 @@ public abstract class DLibUtils {
         Object[] aoKeyA = null;
         Object[] aoKeyB = null;
 
+        if (a == null && b == null) {
+            return true;
+        }
         if (a == null && b != null || a != null && b == null) {
             return false;
         }
