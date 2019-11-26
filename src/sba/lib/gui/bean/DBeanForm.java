@@ -212,6 +212,8 @@ public abstract class DBeanForm extends JDialog implements DGuiForm {
                 jbCancel.requestFocus();
             }
             else {
+                boolean focusRequested = false;
+                
                 for (DGuiField field : moFields.getFields()) {
                     if (field.isFocusable()) {
                         if (field instanceof JSpinner && ((JSpinner) field).getEditor() instanceof JSpinner.NumberEditor) {
@@ -220,7 +222,18 @@ public abstract class DBeanForm extends JDialog implements DGuiForm {
                         else {
                             field.getComponent().requestFocusInWindow();
                         }
+                        
+                        focusRequested = true;
                         break;
+                    }
+                }
+                
+                if (!focusRequested) {
+                    if (jbEdit.isEnabled()) {
+                        jbEdit.requestFocusInWindow();
+                    }
+                    else {
+                        jbCancel.requestFocusInWindow();
                     }
                 }
             }
