@@ -17,6 +17,7 @@ import java.util.Vector;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import sba.lib.DLibConsts;
 import sba.lib.DLibUtils;
 import sba.lib.db.DDbConsts;
@@ -213,7 +214,12 @@ public abstract class DBeanForm extends JDialog implements DGuiForm {
             else {
                 for (DGuiField field : moFields.getFields()) {
                     if (field.isFocusable()) {
-                        field.getComponent().requestFocus();
+                        if (field instanceof JSpinner && ((JSpinner) field).getEditor() instanceof JSpinner.NumberEditor) {
+                            ((JSpinner.NumberEditor) ((JSpinner) field).getEditor()).getTextField().requestFocusInWindow();
+                        }
+                        else {
+                            field.getComponent().requestFocusInWindow();
+                        }
                         break;
                     }
                 }
