@@ -95,11 +95,13 @@ public class DBeanCompoundField extends JPanel implements DGuiCompoundField {
     public void setEnabled(boolean enabled) {
         moDecValue.setEnabled(enabled);
         jtfText.setEnabled(enabled);
+        super.setEnabled(enabled);
     }
 
     @Override
     public void setEditable(boolean editable) {
         moDecValue.setEditable(editable);
+        super.setFocusable(editable);
     }
 
     @Override
