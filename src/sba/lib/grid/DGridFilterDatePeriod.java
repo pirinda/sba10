@@ -11,6 +11,8 @@
 
 package sba.lib.grid;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JPanel;
 import sba.lib.DLibConsts;
 import sba.lib.DLibTimeUtils;
@@ -28,7 +30,7 @@ public class DGridFilterDatePeriod extends JPanel implements DGridFilter {
 
     protected DGuiClient miClient;
     protected DGridPaneView moPaneView;
-    int mnDatePickerType;
+    protected int mnDatePickerType;
     protected DGuiDatePicker moDatePicker;
     protected DGuiDate moDate;
 
@@ -51,12 +53,15 @@ public class DGridFilterDatePeriod extends JPanel implements DGridFilter {
     private void initComponents() {
 
         jtfPeriod = new javax.swing.JTextField();
-        jbPeriod = new javax.swing.JButton();
-        jbCurrentDate = new javax.swing.JButton();
-        jbCurrentMonth = new javax.swing.JButton();
-        jbCurrentYear = new javax.swing.JButton();
+        jpAdjustment = new javax.swing.JPanel();
+        jbIncrementPeriod = new javax.swing.JButton();
+        jbDecrementPeriod = new javax.swing.JButton();
+        jbSetPeriod = new javax.swing.JButton();
+        jbSetCurrentDate = new javax.swing.JButton();
+        jbSetCurrentMonth = new javax.swing.JButton();
+        jbSetCurrentYear = new javax.swing.JButton();
 
-        setLayout(new java.awt.FlowLayout(0, 5, 0));
+        setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 0));
 
         jtfPeriod.setEditable(false);
         jtfPeriod.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -66,145 +71,231 @@ public class DGridFilterDatePeriod extends JPanel implements DGridFilter {
         jtfPeriod.setPreferredSize(new java.awt.Dimension(65, 23));
         add(jtfPeriod);
 
-        jbPeriod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sba/lib/img/cal_cal.gif"))); // NOI18N
-        jbPeriod.setToolTipText("Seleccionar período");
-        jbPeriod.setPreferredSize(new java.awt.Dimension(23, 23));
-        jbPeriod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbPeriodActionPerformed(evt);
-            }
-        });
-        add(jbPeriod);
+        jpAdjustment.setLayout(new java.awt.GridLayout(2, 1, 0, 1));
 
-        jbCurrentDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sba/lib/img/cal_date_day.gif"))); // NOI18N
-        jbCurrentDate.setToolTipText("Día actual");
-        jbCurrentDate.setPreferredSize(new java.awt.Dimension(23, 23));
-        jbCurrentDate.addActionListener(new java.awt.event.ActionListener() {
+        jbIncrementPeriod.setText("+");
+        jbIncrementPeriod.setFocusable(false);
+        jbIncrementPeriod.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jbIncrementPeriod.setPreferredSize(new java.awt.Dimension(20, 11));
+        jbIncrementPeriod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCurrentDateActionPerformed(evt);
+                jbIncrementPeriodActionPerformed(evt);
             }
         });
-        add(jbCurrentDate);
+        jpAdjustment.add(jbIncrementPeriod);
 
-        jbCurrentMonth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sba/lib/img/cal_date_month.gif"))); // NOI18N
-        jbCurrentMonth.setToolTipText("Mes actual");
-        jbCurrentMonth.setPreferredSize(new java.awt.Dimension(23, 23));
-        jbCurrentMonth.addActionListener(new java.awt.event.ActionListener() {
+        jbDecrementPeriod.setText("‒");
+        jbDecrementPeriod.setFocusable(false);
+        jbDecrementPeriod.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jbDecrementPeriod.setPreferredSize(new java.awt.Dimension(20, 11));
+        jbDecrementPeriod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCurrentMonthActionPerformed(evt);
+                jbDecrementPeriodActionPerformed(evt);
             }
         });
-        add(jbCurrentMonth);
+        jpAdjustment.add(jbDecrementPeriod);
 
-        jbCurrentYear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sba/lib/img/cal_date_year.gif"))); // NOI18N
-        jbCurrentYear.setToolTipText("Año actual");
-        jbCurrentYear.setPreferredSize(new java.awt.Dimension(23, 23));
-        jbCurrentYear.addActionListener(new java.awt.event.ActionListener() {
+        add(jpAdjustment);
+
+        jbSetPeriod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sba/lib/img/cal_cal.gif"))); // NOI18N
+        jbSetPeriod.setToolTipText("Seleccionar período");
+        jbSetPeriod.setPreferredSize(new java.awt.Dimension(23, 23));
+        jbSetPeriod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCurrentYearActionPerformed(evt);
+                jbSetPeriodActionPerformed(evt);
             }
         });
-        add(jbCurrentYear);
+        add(jbSetPeriod);
+
+        jbSetCurrentDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sba/lib/img/cal_date_day.gif"))); // NOI18N
+        jbSetCurrentDate.setToolTipText("Día actual");
+        jbSetCurrentDate.setPreferredSize(new java.awt.Dimension(23, 23));
+        jbSetCurrentDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSetCurrentDateActionPerformed(evt);
+            }
+        });
+        add(jbSetCurrentDate);
+
+        jbSetCurrentMonth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sba/lib/img/cal_date_month.gif"))); // NOI18N
+        jbSetCurrentMonth.setToolTipText("Mes actual");
+        jbSetCurrentMonth.setPreferredSize(new java.awt.Dimension(23, 23));
+        jbSetCurrentMonth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSetCurrentMonthActionPerformed(evt);
+            }
+        });
+        add(jbSetCurrentMonth);
+
+        jbSetCurrentYear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sba/lib/img/cal_date_year.gif"))); // NOI18N
+        jbSetCurrentYear.setToolTipText("Año actual");
+        jbSetCurrentYear.setPreferredSize(new java.awt.Dimension(23, 23));
+        jbSetCurrentYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSetCurrentYearActionPerformed(evt);
+            }
+        });
+        add(jbSetCurrentYear);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbPeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPeriodActionPerformed
-        moDatePicker.resetPicker();
-        moDatePicker.setOption(moDate);
-        moDatePicker.setVisible(true);
+    private void jbSetPeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSetPeriodActionPerformed
+        actionSetPeriod();
+    }//GEN-LAST:event_jbSetPeriodActionPerformed
 
-        if (moDatePicker.getPickerResult() == DGuiConsts.FORM_RESULT_OK) {
-            setPeriod(moDatePicker.getOption());
-            moPaneView.putFilter(DGridConsts.FILTER_DATE_PERIOD, moDate);
-        }
-    }//GEN-LAST:event_jbPeriodActionPerformed
+    private void jbSetCurrentDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSetCurrentDateActionPerformed
+        actionSetCurrentDate();
+    }//GEN-LAST:event_jbSetCurrentDateActionPerformed
 
-    private void jbCurrentDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCurrentDateActionPerformed
-        setPeriod(new DGuiDate(DGuiConsts.GUI_DATE_DATE, miClient.getSession().getWorkingDate().getTime()));
-        moPaneView.putFilter(DGridConsts.FILTER_DATE_PERIOD, moDate);
-    }//GEN-LAST:event_jbCurrentDateActionPerformed
+    private void jbSetCurrentMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSetCurrentMonthActionPerformed
+        actionSetCurrentMonth();
+    }//GEN-LAST:event_jbSetCurrentMonthActionPerformed
 
-    private void jbCurrentMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCurrentMonthActionPerformed
-        if (mnDatePickerType == DGuiConsts.DATE_PICKER_DATE) {
-            setPeriod(new DGuiDate(DGuiConsts.GUI_DATE_DATE, DLibTimeUtils.getEndOfMonth(miClient.getSession().getWorkingDate()).getTime()));
-        }
-        else {
-            setPeriod(new DGuiDate(DGuiConsts.GUI_DATE_MONTH, miClient.getSession().getWorkingDate().getTime()));
-        }
-        moPaneView.putFilter(DGridConsts.FILTER_DATE_PERIOD, moDate);
-    }//GEN-LAST:event_jbCurrentMonthActionPerformed
+    private void jbSetCurrentYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSetCurrentYearActionPerformed
+        actionSetCurrentYear();
+    }//GEN-LAST:event_jbSetCurrentYearActionPerformed
 
-    private void jbCurrentYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCurrentYearActionPerformed
-        if (mnDatePickerType == DGuiConsts.DATE_PICKER_DATE) {
-            setPeriod(new DGuiDate(DGuiConsts.GUI_DATE_DATE, DLibTimeUtils.getEndOfYear(miClient.getSession().getWorkingDate()).getTime()));
-        }
-        else {
-            setPeriod(new DGuiDate(DGuiConsts.GUI_DATE_YEAR, miClient.getSession().getWorkingDate().getTime()));
-        }
-        moPaneView.putFilter(DGridConsts.FILTER_DATE_PERIOD, moDate);
-    }//GEN-LAST:event_jbCurrentYearActionPerformed
+    private void jbIncrementPeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIncrementPeriodActionPerformed
+        actionIncrementPeriod();
+    }//GEN-LAST:event_jbIncrementPeriodActionPerformed
+
+    private void jbDecrementPeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDecrementPeriodActionPerformed
+        actionDecrementPeriod();
+    }//GEN-LAST:event_jbDecrementPeriodActionPerformed
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jbDecrementPeriod;
+    private javax.swing.JButton jbIncrementPeriod;
+    private javax.swing.JButton jbSetCurrentDate;
+    private javax.swing.JButton jbSetCurrentMonth;
+    private javax.swing.JButton jbSetCurrentYear;
+    private javax.swing.JButton jbSetPeriod;
+    private javax.swing.JPanel jpAdjustment;
+    private javax.swing.JTextField jtfPeriod;
+    // End of variables declaration//GEN-END:variables
 
     private void initComponentsCustom() {
         switch (mnDatePickerType) {
             case DGuiConsts.DATE_PICKER_DATE:
                 moDatePicker = new DGuiDatePicker(miClient, mnDatePickerType);
                 jtfPeriod.setToolTipText("Fecha de corte");
-                jbPeriod.setToolTipText("Seleccionar fecha de corte");
+                jbSetPeriod.setToolTipText("Seleccionar fecha de corte");
                 break;
             case DGuiConsts.DATE_PICKER_DATE_PERIOD:
                 moDatePicker = new DGuiDatePicker(miClient, mnDatePickerType);
                 jtfPeriod.setToolTipText("Período");
-                jbPeriod.setToolTipText("Seleccionar período");
+                jbSetPeriod.setToolTipText("Seleccionar período");
                 break;
             default:
                 miClient.showMsgBoxError(DLibConsts.ERR_MSG_OPTION_UNKNOWN);
         }
 
-        setPeriod(null);
+        setPeriod(null, false);
     }
 
-    private void renderPeriod() {
-        int[] date = null;
-
+    private void setPeriod(final DGuiDate date, final boolean broadcastEvent) {
+        moDate = date;
+        
         if (moDate == null) {
-            jtfPeriod.setText("");
+            jtfPeriod.setText("?");
         }
         else {
+            SimpleDateFormat format = null;
+            
             switch (moDate.getGuiType()) {
                 case DGuiConsts.GUI_DATE_DATE:
-                    jtfPeriod.setText(DLibUtils.DateFormatDate.format(moDate));
+                    format = DLibUtils.DateFormatDate;
                     break;
                 case DGuiConsts.GUI_DATE_MONTH:
-                    date = DLibTimeUtils.digestMonth(moDate);
-                    jtfPeriod.setText(DLibUtils.DecimalFormatCalendarYear.format(date[0]) + "-" + DLibUtils.DecimalFormatCalendarMonth.format(date[1]));
+                    format = DLibUtils.DateFormatDateYearMonth;
                     break;
                 case DGuiConsts.GUI_DATE_YEAR:
-                    date = DLibTimeUtils.digestYear(moDate);
-                    jtfPeriod.setText(DLibUtils.DecimalFormatCalendarYear.format(date[0]));
+                    format = DLibUtils.DateFormatDateYear;
                     break;
                 default:
             }
+            
+            jtfPeriod.setText(format.format(moDate));
+            
+            if (broadcastEvent) {
+                moPaneView.putFilter(DGridConsts.FILTER_DATE_PERIOD, moDate);
+            }
         }
     }
-
-    private void setPeriod(DGuiDate date) {
-        moDate = date;
-        renderPeriod();
+    
+    private void adjustPeriod(final Adjustment adjustment) {
+        Date date = null;
+        int leap = adjustment == Adjustment.Increment ? 1 : -1;
+        
+        switch (moDate.getGuiType()) {
+            case DGuiConsts.GUI_DATE_DATE:
+                date = DLibTimeUtils.addDate(moDate, 0, 0, leap);
+                break;
+            case DGuiConsts.GUI_DATE_MONTH:
+                date = DLibTimeUtils.addDate(moDate, 0, leap, 0);
+                break;
+            case DGuiConsts.GUI_DATE_YEAR:
+                date = DLibTimeUtils.addDate(moDate, leap, 0, 0);
+                break;
+            default:
+        }
+        
+        setPeriod(new DGuiDate(moDate.getGuiType(), date.getTime()), true);
     }
+    
+    private void actionSetPeriod() {
+        moDatePicker.resetPicker();
+        moDatePicker.setOption(moDate);
+        moDatePicker.setVisible(true);
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jbCurrentDate;
-    private javax.swing.JButton jbCurrentMonth;
-    private javax.swing.JButton jbCurrentYear;
-    private javax.swing.JButton jbPeriod;
-    private javax.swing.JTextField jtfPeriod;
-    // End of variables declaration//GEN-END:variables
-
+        if (moDatePicker.getPickerResult() == DGuiConsts.FORM_RESULT_OK) {
+            setPeriod(moDatePicker.getOption(), true);
+        }
+    }
+    
+    private void actionSetCurrentDate() {
+        setPeriod(new DGuiDate(DGuiConsts.GUI_DATE_DATE, miClient.getSession().getWorkingDate().getTime()), true);
+    }
+    
+    private void actionSetCurrentMonth() {
+        if (mnDatePickerType == DGuiConsts.DATE_PICKER_DATE) {
+            setPeriod(new DGuiDate(DGuiConsts.GUI_DATE_DATE, DLibTimeUtils.getEndOfMonth(miClient.getSession().getWorkingDate()).getTime()), true);
+        }
+        else {
+            setPeriod(new DGuiDate(DGuiConsts.GUI_DATE_MONTH, miClient.getSession().getWorkingDate().getTime()), true);
+        }
+    }
+    
+    private void actionSetCurrentYear() {
+        if (mnDatePickerType == DGuiConsts.DATE_PICKER_DATE) {
+            setPeriod(new DGuiDate(DGuiConsts.GUI_DATE_DATE, DLibTimeUtils.getEndOfYear(miClient.getSession().getWorkingDate()).getTime()), true);
+        }
+        else {
+            setPeriod(new DGuiDate(DGuiConsts.GUI_DATE_YEAR, miClient.getSession().getWorkingDate().getTime()), true);
+        }
+    }
+    
+    private void actionIncrementPeriod() {
+        adjustPeriod(Adjustment.Increment);
+    }
+    
+    private void actionDecrementPeriod() {
+        adjustPeriod(Adjustment.Decrement);
+    }
+    
     /**
-     * @param value Date as sba.lib.gui.DGuiDate.
+     * @param value Date as sa.lib.gui.DGuiDate.
      */
     @Override
     public void initFilter(final Object value) {
-        setPeriod((DGuiDate) value);
+        // 1. set date:
+        setPeriod((DGuiDate) value, false);
+        
+        // 2. once date set, set filter:
         moPaneView.getFiltersMap().put(DGridConsts.FILTER_DATE_PERIOD, moDate);
+    }
+    
+    private enum Adjustment {
+        Increment,
+        Decrement
     }
 }

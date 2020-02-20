@@ -51,6 +51,8 @@ public abstract class DLibUtils {
     public static final SimpleDateFormat DateFormatDate = new SimpleDateFormat("dd/MM/yyyy");
     public static final SimpleDateFormat DateFormatDateShort = new SimpleDateFormat("dd/MM/yy");
     public static final SimpleDateFormat DateFormatDateLong = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy");
+    public static final SimpleDateFormat DateFormatDateYearMonth = new SimpleDateFormat("yyyy-MM");
+    public static final SimpleDateFormat DateFormatDateYear = new SimpleDateFormat("yyyy");
     public static final SimpleDateFormat DateFormatDatetime = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     public static final SimpleDateFormat DateFormatDatetimeTimeZone = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss Z");
     public static final SimpleDateFormat DateFormatTime = new SimpleDateFormat("HH:mm:ss");
@@ -61,8 +63,8 @@ public abstract class DLibUtils {
     public static final SimpleDateFormat CsvFormatDatetime = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     public static final SimpleDateFormat CsvFormatTime = new SimpleDateFormat("HH:mm:ss");
     public static final SimpleDateFormat FileDateFormatDatetime = new SimpleDateFormat("yyyyMMdd HHmmss");
-    public static final HashMap<Character, String> XmlEntityNamesMap = new HashMap<Character, String>();
-    public static final HashMap<Character, String> HtmlEntityNamesMap = new HashMap<Character, String>();
+    public static final HashMap<Character, String> XmlEntityNamesMap = new HashMap<>();
+    public static final HashMap<Character, String> HtmlEntityNamesMap = new HashMap<>();
     public static final char[] RandomKeyChars = new char[] { 
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 
         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 
