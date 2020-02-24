@@ -456,7 +456,7 @@ public abstract class DGridPaneView extends JPanel implements DGridPane, ListSel
         DGuiUtils.createActionMap(this, this, "actionGridClearSettings", "gridClearSettings", KeyEvent.VK_L, KeyEvent.CTRL_DOWN_MASK);
         DGuiUtils.createActionMap(this, this, "actionGridReload", "gridReload", KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK);
         DGuiUtils.createActionMap(this, this, "actionGridSeekValue", "gridSeekValue", KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK);
-        DGuiUtils.createActionMap(this, this, "actionGridSearchValue", "gridSearchValue", KeyEvent.VK_B, KeyEvent.CTRL_DOWN_MASK);
+        DGuiUtils.createActionMap(this, this, "grabFocusToSearch", "focusToSearch", KeyEvent.VK_B, KeyEvent.CTRL_DOWN_MASK);
         DGuiUtils.createActionMap(this, this, "actionGridSearchNextValue", "gridSearchNextValue", KeyEvent.VK_F3, 0);
     }
 
@@ -1137,14 +1137,23 @@ public abstract class DGridPaneView extends JPanel implements DGridPane, ListSel
         }
     }
 
+    public void grabFocusToSearch() {
+        jtfGridSearch.requestFocusInWindow();
+    }
+
     public void actionGridSearchValue() {
-        if (jtTable.getRowCount() > 0) {
+        String text = jtfGridSearch.getText().trim(); // just a simple trim
+        
+        if (!text.isEmpty() && jtTable.getRowCount() > 0) {
             DGridUtils.searchValue(this, jtfGridSearch.getText(), true);
+            jbGridSearchNext.requestFocusInWindow();
         }
     }
 
     public void actionGridSearchNextValue() {
-        if (jtTable.getRowCount() > 0) {
+        String text = jtfGridSearch.getText().trim(); // just a simple trim
+        
+        if (!text.isEmpty() && jtTable.getRowCount() > 0) {
             DGridUtils.searchValue(this, jtfGridSearch.getText(), false);
         }
     }
