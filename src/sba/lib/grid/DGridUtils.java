@@ -835,7 +835,7 @@ public abstract class DGridUtils {
                     col:
                     for (col = 0; col < cols; col++) {
                         if (gridPane.getTable().getValueAt(row, col) != null) {
-                            if (gridPane.getTable().getValueAt(row, col).toString().contains(valueToSearchUpper)) {
+                            if (gridPane.getTable().getValueAt(row, col).toString().toUpperCase().contains(valueToSearchUpper)) {
                                 gridPane.getTable().setRowSelectionInterval(row, row);
                                 break row;
                             }
