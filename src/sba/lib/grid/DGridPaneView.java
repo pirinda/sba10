@@ -384,13 +384,13 @@ public abstract class DGridPaneView extends JPanel implements DGridPane, ListSel
         actionToggleAutoReload();
     }//GEN-LAST:event_jtbAutoReloadActionPerformed
 
-    private void jbGridSearchNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGridSearchNextActionPerformed
-        actionGridSearchNextValue();
-    }//GEN-LAST:event_jbGridSearchNextActionPerformed
-
     private void jtfGridSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfGridSearchActionPerformed
         actionGridSearchValue();
     }//GEN-LAST:event_jtfGridSearchActionPerformed
+
+    private void jbGridSearchNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGridSearchNextActionPerformed
+        actionGridSearchNextValue();
+    }//GEN-LAST:event_jbGridSearchNextActionPerformed
 
     private void initComponentsCustom() {
         moModel = new DGridModel();
