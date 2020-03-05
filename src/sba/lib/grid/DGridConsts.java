@@ -87,8 +87,9 @@ public abstract class DGridConsts {
     public static final int ICON_NULL = 1;
     public static final int ICON_ANNUL = 2;
     public static final int ICON_CROSS = 3;
-    public static final int ICON_OK = 4;
-    public static final int ICON_DOC = 5;
+    public static final int ICON_WARN = 4;
+    public static final int ICON_OK = 5;
+    public static final int ICON_DOC = 6;
     public static final int ICON_THUMBS_UP = 11;
     public static final int ICON_THUMBS_DOWN = 12;
     public static final int ICON_XML_PEND = 21;
