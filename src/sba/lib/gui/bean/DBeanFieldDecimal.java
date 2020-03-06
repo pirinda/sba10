@@ -157,7 +157,7 @@ public class DBeanFieldDecimal extends JTextField implements DGuiFieldDecimal {
 
     @Override
     public int getDataType() {
-        return DLibConsts.DATA_TYPE_INT;
+        return DLibConsts.DATA_TYPE_DEC;
     }
 
     @Override
