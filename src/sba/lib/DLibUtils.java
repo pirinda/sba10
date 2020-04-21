@@ -63,6 +63,7 @@ public abstract class DLibUtils {
     public static final SimpleDateFormat CsvFormatDatetime = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     public static final SimpleDateFormat CsvFormatTime = new SimpleDateFormat("HH:mm:ss");
     public static final SimpleDateFormat FileDateFormatDatetime = new SimpleDateFormat("yyyyMMdd HHmmss");
+    public static final SimpleDateFormat IsoFormatDatetime = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
     public static final HashMap<Character, String> XmlEntityNamesMap = new HashMap<>();
     public static final HashMap<Character, String> HtmlEntityNamesMap = new HashMap<>();
     public static final char[] RandomKeyChars = new char[] { 
