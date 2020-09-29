@@ -459,10 +459,30 @@ public abstract class DLibUtils {
     }
 
     public static double round(final double value, final int decimals) {
-        //return Math.round(value * Math.pow(10, decimals)) / Math.pow(10, decimals);   this method has inconsistencies, e.g. 0.04615 rounded to 4 decimals results in 0.0461 instead of 0.0462!
+        //return Math.round(value * Math.pow(10, decimals)) / Math.pow(10, decimals);   this method has inconsistencies, e.g., 0.04615 rounded to 4 decimals results in 0.0461 instead of 0.0462!
 
+        /*
         RoundingDecimalFormat.setMaximumFractionDigits(decimals);
-        return parseDouble(RoundingDecimalFormat.format(value));
+        return parseDouble(RoundingDecimalFormat.format(value)); // this technic has inconsistences, e.g., 33722.965 rounded to 2 decimals results in 33722.96 instead of 33722.97!
+        */
+        
+        double rounded = Math.round(value * Math.pow(10, decimals)) / Math.pow(10, decimals);
+        
+        String roundedText = "" + rounded;
+        int roundedPointIndex = roundedText.indexOf(".");
+        String roundedDecsText = roundedText.substring(roundedPointIndex + 1);
+        
+        String valueText = "" + value;
+        int valuePointIndex = valueText.indexOf(".");
+        String valueDecsText = valueText.substring(valuePointIndex + 1);
+        
+        if (valueDecsText.length() > decimals && valueDecsText.charAt(decimals) >= '5' && valueDecsText.length() > roundedDecsText.length() && roundedDecsText.equals(valueDecsText.substring(0, decimals))) {
+            // force rounding up of value when due to a natural rounding issue it has not been rounded up:
+            rounded = Math.round(value * Math.pow(10, decimals)) / Math.pow(10, decimals) + parseDouble("0." + textRepeat("0", decimals - 1) + "1");
+        }
+        
+        RoundingDecimalFormat.setMaximumFractionDigits(decimals);
+        return parseDouble(RoundingDecimalFormat.format(rounded));
     }
 
     public static double roundAmount(final double value) {
