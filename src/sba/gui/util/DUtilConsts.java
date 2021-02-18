@@ -73,6 +73,7 @@ public abstract class DUtilConsts {
     public static final int NUM_SNG = 1;
     public static final int NUM_PLR = 2;
 
+    public static final int LEV_NONE = 0;
     public static final int LEV_READ = 1;
     public static final int LEV_CAPTURE = 2;
     public static final int LEV_AUTHOR = 3;
