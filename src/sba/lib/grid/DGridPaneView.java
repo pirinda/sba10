@@ -1440,6 +1440,12 @@ public abstract class DGridPaneView extends JPanel implements DGridPane, ListSel
     }
 
     @Override
+    public void initSortKeysDescending() {
+        miSortKeysList.clear();
+        miSortKeysList.add(new RowSorter.SortKey(0, SortOrder.DESCENDING));
+    }
+
+    @Override
     public void putFilter(final int filterType, final Object filterValue) {
         moFiltersMap.put(filterType, filterValue);
         refreshGridWithRefresh();
