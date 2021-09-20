@@ -63,14 +63,14 @@ public abstract class DGuiUtils {
 
     public static void locateItem(final JComboBox comboBox, final int[] key) {
         boolean located = false;
-        DGuiItem item = null;
+        DGuiItem guiItem = null;
 
         if (comboBox.getItemCount() > 0) {
             if (key != null) {
                 for (int i = 0; i < comboBox.getItemCount(); i++) {
-                    item = (DGuiItem) comboBox.getItemAt(i);
+                    guiItem = (DGuiItem) comboBox.getItemAt(i);
 
-                    if (DLibUtils.compareKeys(key, item.getPrimaryKey())) {
+                    if (DLibUtils.compareKeys(key, guiItem.getPrimaryKey())) {
                         comboBox.setSelectedIndex(i);
                         located = true;
                         break;
@@ -84,16 +84,39 @@ public abstract class DGuiUtils {
         }
     }
 
-    public static void locateItem(final JComboBox comboBox, final String value) {
+    public static void locateItem(final JComboBox comboBox, final String item) {
         boolean located = false;
-        DGuiItem item = null;
+        DGuiItem guiItem = null;
 
         if (comboBox.getItemCount() > 0) {
-            if (!value.isEmpty()) {
+            if (!item.isEmpty()) {
                 for (int i = 0; i < comboBox.getItemCount(); i++) {
-                    item = (DGuiItem) comboBox.getItemAt(i);
+                    guiItem = (DGuiItem) comboBox.getItemAt(i);
 
-                    if (value.compareTo(item.getItem()) == 0) {
+                    if (item.compareTo(guiItem.getItem()) == 0) {
+                        comboBox.setSelectedIndex(i);
+                        located = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!located) {
+                comboBox.setSelectedIndex(0);
+            }
+        }
+    }
+
+    public static void locateItemByCode(final JComboBox comboBox, final String code) {
+        boolean located = false;
+        DGuiItem guiItem = null;
+
+        if (comboBox.getItemCount() > 0) {
+            if (!code.isEmpty()) {
+                for (int i = 0; i < comboBox.getItemCount(); i++) {
+                    guiItem = (DGuiItem) comboBox.getItemAt(i);
+
+                    if (code.compareTo(guiItem.getCode()) == 0) {
                         comboBox.setSelectedIndex(i);
                         located = true;
                         break;
@@ -109,14 +132,14 @@ public abstract class DGuiUtils {
 
     public static void locateItem(final JList list, final int[] key) {
         boolean located = false;
-        DGuiItem item = null;
+        DGuiItem guiItem = null;
 
         if (list.getModel().getSize() > 0) {
             if (key != null) {
                 for (int i = 0; i < list.getModel().getSize(); i++) {
-                    item = (DGuiItem) list.getModel().getElementAt(i);
+                    guiItem = (DGuiItem) list.getModel().getElementAt(i);
 
-                    if (DLibUtils.compareKeys(key, item.getPrimaryKey())) {
+                    if (DLibUtils.compareKeys(key, guiItem.getPrimaryKey())) {
                         list.setSelectedIndex(i);
                         located = true;
                         break;
