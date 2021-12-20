@@ -154,6 +154,7 @@ public abstract class DGuiModule implements DGuiController {
     public DDbRegistry getLastRegistry() { return moLastRegistry; }
     public HashMap<Integer, DGuiForm> getUserFormsMap() { return moUserFormsMap; }
     public ImageIcon getModuleIcon() { return moModuleIcon; }
+    public void afterRegistrySaved() { }
 
     public abstract JMenu[] getMenus();
     public abstract DDbRegistry getRegistry(final int type, final DGuiParams params);
@@ -289,6 +290,8 @@ public abstract class DGuiModule implements DGuiController {
                     moLastRegistry.setRegistryEdited(true);
                     miClient.getSession().notifySuscriptors(moLastRegistry.getRegistryType());
                 }
+                
+                afterRegistrySaved();
             }
         }
         catch (SQLException e) {

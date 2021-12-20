@@ -5,6 +5,7 @@
 
 package sba.lib.db;
 
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ import sba.lib.gui.DGuiSession;
  *
  * @author Sergio Flores
  */
-public abstract class DDbRegistry {
+public abstract class DDbRegistry implements Serializable {
 
     public static final int FIELD_CODE = 1001;
     public static final int FIELD_NAME = 1002;
