@@ -31,6 +31,7 @@ public abstract class DDbConsts {
     public static final int ACTION_SAVE = 2;
     public static final int ACTION_DELETE = 3;
     public static final int ACTION_ANNUL = 4;
+    public static final int ACTION_STAMP = 9;
 
     public static final String FIELD_ID = "f_id_";
     public static final String FIELD_FK = "f_fk_";
