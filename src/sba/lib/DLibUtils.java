@@ -684,6 +684,16 @@ public abstract class DLibUtils {
         return text;
     }
 
+    public static String textImplode(final int[] values, final String separator) {
+        String text = "";
+
+        for (int value : values) {
+            text += (text.isEmpty() ? "" : separator) + value;
+        }
+
+        return text;
+    }
+
     public static String validateSafePath(final String path) throws Exception {
         String text = new String("\\/:*?\"<>|");
         char[] chars = text.toCharArray();
