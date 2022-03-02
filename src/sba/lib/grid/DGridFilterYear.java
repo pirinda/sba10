@@ -47,10 +47,13 @@ public class DGridFilterYear extends JPanel implements DGridFilter {
     private void initComponents() {
 
         jtfPeriod = new javax.swing.JTextField();
+        jpAdjustment = new javax.swing.JPanel();
+        jbIncrementPeriod = new javax.swing.JButton();
+        jbDecrementPeriod = new javax.swing.JButton();
         jbPeriod = new javax.swing.JButton();
         jbCurrentPeriod = new javax.swing.JButton();
 
-        setLayout(new java.awt.FlowLayout(0, 5, 0));
+        setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 0));
 
         jtfPeriod.setEditable(false);
         jtfPeriod.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -59,6 +62,32 @@ public class DGridFilterYear extends JPanel implements DGridFilter {
         jtfPeriod.setFocusable(false);
         jtfPeriod.setPreferredSize(new java.awt.Dimension(45, 23));
         add(jtfPeriod);
+
+        jpAdjustment.setLayout(new java.awt.GridLayout(2, 1, 0, 1));
+
+        jbIncrementPeriod.setText("+");
+        jbIncrementPeriod.setFocusable(false);
+        jbIncrementPeriod.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jbIncrementPeriod.setPreferredSize(new java.awt.Dimension(20, 11));
+        jbIncrementPeriod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbIncrementPeriodActionPerformed(evt);
+            }
+        });
+        jpAdjustment.add(jbIncrementPeriod);
+
+        jbDecrementPeriod.setText("‒");
+        jbDecrementPeriod.setFocusable(false);
+        jbDecrementPeriod.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jbDecrementPeriod.setPreferredSize(new java.awt.Dimension(20, 11));
+        jbDecrementPeriod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbDecrementPeriodActionPerformed(evt);
+            }
+        });
+        jpAdjustment.add(jbDecrementPeriod);
+
+        add(jpAdjustment);
 
         jbPeriod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sba/lib/img/cal_cal.gif"))); // NOI18N
         jbPeriod.setToolTipText("Seleccionar período");
@@ -87,15 +116,27 @@ public class DGridFilterYear extends JPanel implements DGridFilter {
         moYearPicker.setVisible(true);
 
         if (moYearPicker.getPickerResult() == DGuiConsts.FORM_RESULT_OK) {
+            // set period:
             setPeriod(moYearPicker.getOption());
+            // then update filter into view, note that this WILL trigger a view update:
             moPaneView.putFilter(DGridConsts.FILTER_YEAR, manPeriod);
         }
     }//GEN-LAST:event_jbPeriodActionPerformed
 
     private void jbCurrentPeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCurrentPeriodActionPerformed
+        // set period:
         setPeriod(DLibTimeUtils.digestYear(miClient.getSession().getWorkingDate()));
+        // then update filter into view, note that this WILL trigger a view update:
         moPaneView.putFilter(DGridConsts.FILTER_YEAR, manPeriod);
     }//GEN-LAST:event_jbCurrentPeriodActionPerformed
+
+    private void jbIncrementPeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIncrementPeriodActionPerformed
+        adjustPeriod(Adjustment.Increment);
+    }//GEN-LAST:event_jbIncrementPeriodActionPerformed
+
+    private void jbDecrementPeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDecrementPeriodActionPerformed
+        adjustPeriod(Adjustment.Decrement);
+    }//GEN-LAST:event_jbDecrementPeriodActionPerformed
 
     private void initComponentsCustom() {
         moYearPicker = new DGuiYearPicker(miClient);
@@ -115,10 +156,21 @@ public class DGridFilterYear extends JPanel implements DGridFilter {
         manPeriod = period;
         renderPeriod();
     }
+    
+    private void adjustPeriod(final Adjustment adjustment) {
+        int leap = adjustment == Adjustment.Increment ? 1 : -1;
+        // set period:
+        setPeriod(new int[] { manPeriod[0] + leap });
+        // then update filter into view, note that this WILL trigger a view update:
+        moPaneView.putFilter(DGridConsts.FILTER_YEAR, manPeriod);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbCurrentPeriod;
+    private javax.swing.JButton jbDecrementPeriod;
+    private javax.swing.JButton jbIncrementPeriod;
     private javax.swing.JButton jbPeriod;
+    private javax.swing.JPanel jpAdjustment;
     private javax.swing.JTextField jtfPeriod;
     // End of variables declaration//GEN-END:variables
 
@@ -127,7 +179,14 @@ public class DGridFilterYear extends JPanel implements DGridFilter {
      */
     @Override
     public void initFilter(final Object value) {
+        // set period:
         setPeriod((int[]) value);
+        // then update filter into view, note that this WILL NOT trigger a view update:
         moPaneView.getFiltersMap().put(DGridConsts.FILTER_YEAR, manPeriod);
+    }
+    
+    private enum Adjustment {
+        Increment,
+        Decrement
     }
 }
