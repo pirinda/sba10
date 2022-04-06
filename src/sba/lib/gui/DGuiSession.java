@@ -15,10 +15,12 @@ import javax.swing.JComboBox;
 import sba.lib.DLibConsts;
 import sba.lib.DLibTimeUtils;
 import sba.lib.DLibUtils;
+import sba.lib.db.DDbConsts;
 import sba.lib.db.DDbDatabase;
 import sba.lib.db.DDbDatabaseMonitor;
 import sba.lib.db.DDbRegistry;
 import sba.lib.grid.DGridPaneView;
+
 
 /**
  *
@@ -40,20 +42,52 @@ public class DGuiSession implements DGuiController {
     protected DGuiConfigBranch miConfigBranch;
     protected DGuiConfigBranch miConfigBranchHq;
     protected DGuiEdsSignature miEdsSignature;
-    protected ArrayList<DGuiEdsSignature> maEdsSignatures;
     protected DGuiModuleUtils miModuleUtils;
     protected Vector<DGuiModule> mvModules;
+    protected ArrayList<DGuiEdsSignature> maEdsSignatures;
 
     public DGuiSession(DGuiClient client) {
         miClient = client;
+        mvModules = new Vector<>();
         maEdsSignatures = new ArrayList<>();
-        mvModules = new Vector<DGuiModule>();
         initSession();
     }
 
     private void stopMonitor() {
         if (moDatabaseMonitor != null && moDatabaseMonitor.isAlive()) {
             moDatabaseMonitor.stopThread();
+        }
+    }
+
+    private void checkStatement() {
+        try {
+            // check database:
+            
+            if (moDatabase == null) {
+                throw new Exception("No se ha definido la base de datos.");
+            }
+            else if (!moDatabase.isConnected()) {
+                if (moDatabase.reconnect() != DDbConsts.CONNECTION_OK) {
+                    throw new Exception("No se pudo reconectar la base de datos.");
+                }
+            }
+            
+            // check database:
+            
+            if (miStatement == null || miStatement.isClosed()) {
+                if (moDatabaseMonitor == null || !moDatabaseMonitor.isAlive()) {
+                    prepareDatabase(); // creates statement aswell
+                }
+                else {
+                    miStatement = moDatabase.getConnection().createStatement();
+                }
+            }
+        }
+        catch (SQLException e) {
+            DLibUtils.showException(this, e);
+        }
+        catch (Exception e) {
+            DLibUtils.showException(this, e);
         }
     }
 
@@ -89,7 +123,9 @@ public class DGuiSession implements DGuiController {
         miConfigBranchHq = null;
         miEdsSignature = null;
         miModuleUtils = null;
+        
         mvModules.clear();
+        maEdsSignatures.clear();
     }
 
     public void setClient(DGuiClient o) { miClient = o; }
@@ -99,7 +135,7 @@ public class DGuiSession implements DGuiController {
     public void setWorkingDate(Date t) { mtWorkingDate = t; }
     public void setUserTs(Date t) { mtUserTs = t; }
     public void setDatabase(DDbDatabase o) { moDatabase = o; prepareDatabase(); }
-    public void setStatement(Statement i) { miStatement = i; }
+    //public void setStatement(Statement i) { miStatement = i; } // statement should not be set manually
     public void setConfigSystem(DGuiConfigSystem i) { miConfigSystem = i; }
     public void setConfigCompany(DGuiConfigCompany i) { miConfigCompany = i; }
     public void setConfigBranch(DGuiConfigBranch i) { miConfigBranch = i; }
@@ -107,6 +143,7 @@ public class DGuiSession implements DGuiController {
     public void setEdsSignature(DGuiEdsSignature i) { miEdsSignature = i; }
     public void setModuleUtils(DGuiModuleUtils i) { miModuleUtils = i; }
 
+    
     public DGuiClient getClient() { return miClient; }
     public DGuiUser getUser() { return miUser; }
     public DGuiSessionCustom getSessionCustom() { return miSessionCustom; }
@@ -114,39 +151,24 @@ public class DGuiSession implements DGuiController {
     public Date getWorkingDate() { return mtWorkingDate; }
     public Date getUserTs() { return mtUserTs; }
     public DDbDatabase getDatabase() { return moDatabase; }
-    public Statement getStatement() { return miStatement; }
+    public Statement getStatement() { checkStatement(); return miStatement; }
     public DGuiConfigSystem getConfigSystem() { return miConfigSystem; }
     public DGuiConfigCompany getConfigCompany() { return miConfigCompany; }
     public DGuiConfigBranch getConfigBranch() { return miConfigBranch; }
     public DGuiConfigBranch getConfigBranchHq() { return miConfigBranchHq; }
     public DGuiEdsSignature getEdsSignature() { return miEdsSignature; }
-    public ArrayList<DGuiEdsSignature> getEdsSignatures() { return maEdsSignatures; }
     public DGuiModuleUtils getModuleUtils() { return miModuleUtils; }
+    
     public Vector<DGuiModule> getModules() { return mvModules; }
+    public ArrayList<DGuiEdsSignature> getEdsSignatures() { return maEdsSignatures; }
 
     public int getSystemYear() { return DLibTimeUtils.digestYear(mtSystemDate)[0]; }
     public int getWorkingYear() { return DLibTimeUtils.digestYear(mtWorkingDate)[0]; }
 
     /**
-     * Gets signature by key.
-     * @param key Signature key.
-     */
-    public DGuiEdsSignature getEdsSignature(final int[] key) {
-        DGuiEdsSignature signature = null;
-        
-        for (DGuiEdsSignature es : maEdsSignatures) {
-            if (DLibUtils.compareKeys(key, es.getKey())) {
-                signature = es;
-                break;
-            }
-        }
-        
-        return signature;
-    }
-
-    /**
      * Gets module by module type.
      * @param type Module type. Constants defined in DModConsts (MOD_...).
+     * @return GUI module.
      */
     public DGuiModule getModule(final int type) {
         return getModule(type, DLibConsts.UNDEFINED);
@@ -155,7 +177,8 @@ public class DGuiSession implements DGuiController {
     /**
      * Gets module by module type and subtype.
      * @param type Module type. Constants defined in DModConsts (MOD_...).
-     * @param type Module subtype. Constants defined in DModSysConsts (CS_MOD_...).
+     * @param subtype Module subtype. Constants defined in DModSysConsts (CS_MOD_...).
+     * @return GUI module.
      */
     public DGuiModule getModule(final int type, final int subtype) {
         DGuiModule module = null;
@@ -172,6 +195,9 @@ public class DGuiSession implements DGuiController {
 
     /**
      * Gets module by GUI type and subtype (i.e. registry, view, form, etc.).
+     * @param type Module type. Constants defined in DModConsts (MOD_...).
+     * @param subtype Module subtype. Constants defined in DModSysConsts (CS_MOD_...).
+     * @return GUI module.
      */
     public DGuiModule getModuleByGuiType(final int type, final int subtype) {
         DGuiModule module = null;
@@ -188,6 +214,24 @@ public class DGuiSession implements DGuiController {
         return module;
     }
 
+    /**
+     * Gets signature by key.
+     * @param key Signature key.
+     * @return EDS signature.
+     */
+    public DGuiEdsSignature getEdsSignature(final int[] key) {
+        DGuiEdsSignature signature = null;
+        
+        for (DGuiEdsSignature es : maEdsSignatures) {
+            if (DLibUtils.compareKeys(key, es.getKey())) {
+                signature = es;
+                break;
+            }
+        }
+        
+        return signature;
+    }
+
     public void notifySuscriptors(final int suscriptor) {
         int count = miClient.getTabbedPane().getTabCount();
 
@@ -195,7 +239,9 @@ public class DGuiSession implements DGuiController {
             DGuiUtils.setCursorWait(miClient);
 
             for (int index = 0; index < count; index++) {
-                ((DGridPaneView) miClient.getTabbedPane().getComponentAt(index)).triggerSuscription(suscriptor);
+                if (miClient.getTabbedPane().getComponentAt(index) instanceof DGridPaneView) {
+                    ((DGridPaneView) miClient.getTabbedPane().getComponentAt(index)).triggerSuscription(suscriptor);
+                }
             }
         }
         catch (Exception e) {
@@ -250,6 +296,7 @@ public class DGuiSession implements DGuiController {
      * Reads database registry (reading verbose mode).
      * @param type Registry type.
      * @param pk Registry primary key.
+     * @return Registry.
      */
     @Override
     public DDbRegistry readRegistry(final int type, final int[] pk) {
@@ -261,6 +308,7 @@ public class DGuiSession implements DGuiController {
      * @param type Registry type.
      * @param pk Registry primary key.
      * @param mode Reading mode. Constants defined in DDbConsts (MODE_VERBOSE, MODE_STEALTH).
+     * @return Registry.
      */
     @Override
     public DDbRegistry readRegistry(final int type, final int[] pk, final int mode) {
