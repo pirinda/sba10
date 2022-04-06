@@ -67,6 +67,7 @@ public class DGuiSession implements DGuiController {
                 throw new Exception("No se ha definido la base de datos.");
             }
             else if (!moDatabase.isConnected()) {
+                System.out.println("Intentando reconectar la base de datos...");
                 if (moDatabase.reconnect() != DDbConsts.CONNECTION_OK) {
                     throw new Exception("No se pudo reconectar la base de datos.");
                 }
@@ -92,6 +93,8 @@ public class DGuiSession implements DGuiController {
     }
 
     private void prepareDatabase() {
+        System.out.println("Preparando el monitor de la base de datos...");
+        
         try {
             moDatabaseMonitor = new DDbDatabaseMonitor(moDatabase);
             moDatabaseMonitor.startThread();
