@@ -73,7 +73,7 @@ public class DGuiSession implements DGuiController {
                 }
             }
             
-            // check database:
+            // check database statement:
             
             if (miStatement == null || miStatement.isClosed()) {
                 if (moDatabaseMonitor == null || !moDatabaseMonitor.isAlive()) {
