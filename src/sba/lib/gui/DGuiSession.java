@@ -61,27 +61,30 @@ public class DGuiSession implements DGuiController {
 
     private void checkStatement() {
         try {
-            // check database:
-            
-            if (moDatabase == null) {
-                throw new Exception("No se ha definido la base de datos.");
-            }
-            else if (!moDatabase.isConnected()) {
-                System.out.println("Intentando reconectar la base de datos...");
-                if (moDatabase.reconnect() != DDbConsts.CONNECTION_OK) {
-                    throw new Exception("No se pudo reconectar la base de datos.");
-                }
-            }
-            
-            // check database statement:
-            
             if (miStatement == null || miStatement.isClosed()) {
+                // restore database statement:
+                System.out.println("Intentando restaurar el objeto declaración de la base de datos...");
+
+                // first check database:
+                if (moDatabase == null) {
+                    throw new Exception("No se ha definido la base de datos.");
+                }
+                else if (!moDatabase.isConnected()) {
+                    System.out.println("Intentando reconectar la base de datos...");
+                    if (moDatabase.reconnect() != DDbConsts.CONNECTION_OK) {
+                        throw new Exception("No se pudo reconectar la base de datos.");
+                    }
+                }
+            
                 if (moDatabaseMonitor == null || !moDatabaseMonitor.isAlive()) {
                     prepareDatabase(); // creates statement aswell
                 }
                 else {
+                    // create statement:
                     miStatement = moDatabase.getConnection().createStatement();
                 }
+                
+                System.out.println("El objeto declaración de la base de datos fue restaurado!");
             }
         }
         catch (SQLException e) {
