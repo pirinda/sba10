@@ -65,6 +65,8 @@ public class DGuiConsts {
     public static final int FORM_ACTION_EDIT = 2;
 
     public static final int PARAM_KEY = 1;
+    public static final int PARAM_MODE = 2;
+    public static final int PARAM_STATUS = 3;
     public static final int PARAM_YEAR = 6;
     public static final int PARAM_DATE = 7;
     public static final int PARAM_DATE_STA = 8;
@@ -84,6 +86,9 @@ public class DGuiConsts {
     public static final int PARAM_ROWS = 101;
     public static final int PARAM_REGS_ACT = 201; // only active registries
     public static final int PARAM_REGS_ALL = 202; // all registries
+    public static final int PARAM_ANNUL_REASON = 301;
+    public static final int PARAM_ANNUL_RELATED_UUID = 302;
+    public static final int PARAM_ANNUL_RETRY_CANCEL = 303;
 
     public static final String TXT_BTN_FIND = "Buscar";
     public static final String TXT_BTN_SAVE = "Guardar";
@@ -148,4 +153,5 @@ public class DGuiConsts {
     public static final String ERR_MSG_FORM_EXIST_REG = "La forma de captura sólo es para registros existentes.";
     public static final String ERR_MSG_UNDEF_REG = "Aún no se ha especificado un registro.";
     public static final String ERR_MSG_UNDEF_OPTION = "Aún no se ha especificado una opción.";
+    public static final String ERR_MSG_UNDEF_VALUE = "Aún no se ha especificado una valor.";
 }
