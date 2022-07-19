@@ -55,6 +55,9 @@ public abstract class DUtilConsts {
     public static final int PRC_Y = 101;    // prices? yes!
     public static final int PRC_N = 102;    // prices? no!
 
+    public static final int ACTION_OPEN = 1;
+    public static final int ACTION_CLOSE = 2;
+
     public static final int PER_CUR = 1;
     public static final int PER_ENT_CSH = 2;
     public static final int PER_ENT_WAH = 3;
