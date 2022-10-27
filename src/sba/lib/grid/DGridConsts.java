@@ -81,6 +81,19 @@ public abstract class DGridConsts {
     public static final int FILTER_YEAR = 6;
     public static final int FILTER_YEAR_MONTH = 7;
 
+    public static final int FILTER_DATA_TYPE_INT = 1;
+    public static final int FILTER_DATA_TYPE_INT_ARRAY = 2;
+    public static final int FILTER_DATA_TYPE_DEC = 3;
+    public static final int FILTER_DATA_TYPE_DEC_ARRAY = 4;
+    public static final int FILTER_DATA_TYPE_BOOL = 5;
+    public static final int FILTER_DATA_TYPE_BOOL_ARRAY = 6;
+    public static final int FILTER_DATA_TYPE_TEXT = 7;
+    public static final int FILTER_DATA_TYPE_TEXT_ARRAY = 8;
+    public static final int FILTER_DATA_TYPE_DATE = 9;
+    public static final int FILTER_DATA_TYPE_DATE_ARRAY = 10;
+    public static final int FILTER_DATA_TYPE_GUIDATE = 11;
+    public static final int FILTER_DATA_TYPE_GUIDATE_ARRAY = 12;
+
     public static final int DATE_TYPE_EVT = 1;
     public static final int DATE_TYPE_DOC = 2;
 
@@ -97,6 +110,14 @@ public abstract class DGridConsts {
     public static final int ICON_XML_ANNUL = 23;
     public static final int ICON_XML_ANNUL_PDF = 26;
     public static final int ICON_XML_ANNUL_XML = 27;
+    public static final int ICON_CIRC_WHITE = 101;
+    public static final int ICON_CIRC_RED = 102;
+    public static final int ICON_CIRC_YELLOW = 103;
+    public static final int ICON_CIRC_GREEN = 104;
+    public static final int ICON_CIRC_CYAN = 105;
+    public static final int ICON_CIRC_BLUE = 106;
+    public static final int ICON_CIRC_MAGENTA = 107;
+    public static final int ICON_CIRC_BLACK = 108;
     
     public static final int MAX_DECS = 8;
 
@@ -153,5 +174,6 @@ public abstract class DGridConsts {
     public static final String ERR_MSG_VAL_NOT_FOUND = "El valor buscado no fue encontrado.";
     public static final String ERR_MSG_ROW_TYPE_DATA = "El renglón no es de datos.";
     public static final String ERR_MSG_ROW_TYPE_SUM = "El renglón no es de suma.";
+    public static final String ERR_MSG_ACCESS_VIEW = "Se carece de los derechos suficientes para ver la vista: ";
     public static final String ERR_MSG_PREFS_VIEW = "Ocurrió una excepción al procesar las preferencias de la vista, se desplegará en su configuración predeterminada.";
 }
