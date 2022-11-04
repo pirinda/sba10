@@ -317,6 +317,11 @@ public class DBeanFieldInteger extends JTextField implements DGuiFieldInteger {
     }
 
     @Override
+    public void setIntegerFormat(final DecimalFormat format) {
+        moDecimalFormat = format;
+    }
+
+    @Override
     public void setGuiType(final int type) {
         mnGuiType = type;
 
