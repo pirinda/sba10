@@ -49,12 +49,18 @@ public abstract class DGridUtils {
     public static final DGridCellRendererNumber CellRendererCalendarYear = new DGridCellRendererNumber(DLibUtils.DecimalFormatCalendarYear);
     public static final DGridCellRendererNumber CellRendererCalendarMonth = new DGridCellRendererNumber(DLibUtils.DecimalFormatCalendarMonth);
     public static final DGridCellRendererNumber CellRendererValue0D = new DGridCellRendererNumber(DLibUtils.DecimalFormatValue0D);
+    public static final DGridCellRendererNumber CellRendererValue1D = new DGridCellRendererNumber(DLibUtils.DecimalFormatValue1D);
     public static final DGridCellRendererNumber CellRendererValue2D = new DGridCellRendererNumber(DLibUtils.DecimalFormatValue2D);
+    public static final DGridCellRendererNumber CellRendererValue3D = new DGridCellRendererNumber(DLibUtils.DecimalFormatValue3D);
     public static final DGridCellRendererNumber CellRendererValue4D = new DGridCellRendererNumber(DLibUtils.DecimalFormatValue4D);
+    public static final DGridCellRendererNumber CellRendererValue6D = new DGridCellRendererNumber(DLibUtils.DecimalFormatValue6D);
     public static final DGridCellRendererNumber CellRendererValue8D = new DGridCellRendererNumber(DLibUtils.DecimalFormatValue8D);
     public static final DGridCellRendererNumber CellRendererPercentage0D = new DGridCellRendererNumber(DLibUtils.DecimalFormatPercentage0D);
+    public static final DGridCellRendererNumber CellRendererPercentage1D = new DGridCellRendererNumber(DLibUtils.DecimalFormatPercentage1D);
     public static final DGridCellRendererNumber CellRendererPercentage2D = new DGridCellRendererNumber(DLibUtils.DecimalFormatPercentage2D);
+    public static final DGridCellRendererNumber CellRendererPercentage3D = new DGridCellRendererNumber(DLibUtils.DecimalFormatPercentage3D);
     public static final DGridCellRendererNumber CellRendererPercentage4D = new DGridCellRendererNumber(DLibUtils.DecimalFormatPercentage4D);
+    public static final DGridCellRendererNumber CellRendererPercentage6D = new DGridCellRendererNumber(DLibUtils.DecimalFormatPercentage6D);
     public static final DGridCellRendererNumber CellRendererPercentage8D = new DGridCellRendererNumber(DLibUtils.DecimalFormatPercentage8D);
     public static final DGridCellRendererDefault CellRendererString = new DGridCellRendererDefault();
     public static final DGridCellRendererBoolean CellRendererBoolean = new DGridCellRendererBoolean();
@@ -126,11 +132,20 @@ public abstract class DGridUtils {
             case DGridConsts.COL_TYPE_DEC_0D:
                 width = 60;
                 break;
+            case DGridConsts.COL_TYPE_DEC_1D:
+                width = 70;
+                break;
             case DGridConsts.COL_TYPE_DEC_2D:
                 width = 80;
                 break;
+            case DGridConsts.COL_TYPE_DEC_3D:
+                width = 90;
+                break;
             case DGridConsts.COL_TYPE_DEC_4D:
                 width = 100;
+                break;
+            case DGridConsts.COL_TYPE_DEC_6D:
+                width = 110;
                 break;
             case DGridConsts.COL_TYPE_DEC_8D:
                 width = 120;
@@ -150,11 +165,20 @@ public abstract class DGridUtils {
             case DGridConsts.COL_TYPE_DEC_PER_0D:
                 width = 60;
                 break;
+            case DGridConsts.COL_TYPE_DEC_PER_1D:
+                width = 70;
+                break;
             case DGridConsts.COL_TYPE_DEC_PER_2D:
                 width = 80;
                 break;
+            case DGridConsts.COL_TYPE_DEC_PER_3D:
+                width = 90;
+                break;
             case DGridConsts.COL_TYPE_DEC_PER_4D:
                 width = 100;
+                break;
+            case DGridConsts.COL_TYPE_DEC_PER_6D:
+                width = 110;
                 break;
             case DGridConsts.COL_TYPE_DEC_PER_8D:
                 width = 120;
@@ -272,11 +296,20 @@ public abstract class DGridUtils {
             case DGridConsts.COL_TYPE_DEC_0D:
                 renderer = CellRendererValue0D;
                 break;
+            case DGridConsts.COL_TYPE_DEC_1D:
+                renderer = CellRendererValue1D;
+                break;
             case DGridConsts.COL_TYPE_DEC_2D:
                 renderer = CellRendererValue2D;
                 break;
+            case DGridConsts.COL_TYPE_DEC_3D:
+                renderer = CellRendererValue3D;
+                break;
             case DGridConsts.COL_TYPE_DEC_4D:
                 renderer = CellRendererValue4D;
+                break;
+            case DGridConsts.COL_TYPE_DEC_6D:
+                renderer = CellRendererValue6D;
                 break;
             case DGridConsts.COL_TYPE_DEC_8D:
                 renderer = CellRendererValue8D;
@@ -296,11 +329,20 @@ public abstract class DGridUtils {
             case DGridConsts.COL_TYPE_DEC_PER_0D:
                 renderer = CellRendererPercentage0D;
                 break;
+            case DGridConsts.COL_TYPE_DEC_PER_1D:
+                renderer = CellRendererPercentage1D;
+                break;
             case DGridConsts.COL_TYPE_DEC_PER_2D:
                 renderer = CellRendererPercentage2D;
                 break;
+            case DGridConsts.COL_TYPE_DEC_PER_3D:
+                renderer = CellRendererPercentage3D;
+                break;
             case DGridConsts.COL_TYPE_DEC_PER_4D:
                 renderer = CellRendererPercentage4D;
+                break;
+            case DGridConsts.COL_TYPE_DEC_PER_6D:
+                renderer = CellRendererPercentage6D;
                 break;
             case DGridConsts.COL_TYPE_DEC_PER_8D:
                 renderer = CellRendererPercentage8D;
@@ -368,16 +410,22 @@ public abstract class DGridUtils {
                 type = DLibConsts.DATA_TYPE_INT;
                 break;
             case DGridConsts.COL_TYPE_DEC_0D:
+            case DGridConsts.COL_TYPE_DEC_1D:
             case DGridConsts.COL_TYPE_DEC_2D:
+            case DGridConsts.COL_TYPE_DEC_3D:
             case DGridConsts.COL_TYPE_DEC_4D:
+            case DGridConsts.COL_TYPE_DEC_6D:
             case DGridConsts.COL_TYPE_DEC_8D:
             case DGridConsts.COL_TYPE_DEC_AMT:
             case DGridConsts.COL_TYPE_DEC_AMT_UNIT:
             case DGridConsts.COL_TYPE_DEC_EXC_RATE:
             case DGridConsts.COL_TYPE_DEC_QTY:
             case DGridConsts.COL_TYPE_DEC_PER_0D:
+            case DGridConsts.COL_TYPE_DEC_PER_1D:
             case DGridConsts.COL_TYPE_DEC_PER_2D:
+            case DGridConsts.COL_TYPE_DEC_PER_3D:
             case DGridConsts.COL_TYPE_DEC_PER_4D:
+            case DGridConsts.COL_TYPE_DEC_PER_6D:
             case DGridConsts.COL_TYPE_DEC_PER_8D:
             case DGridConsts.COL_TYPE_DEC_PER_TAX:
             case DGridConsts.COL_TYPE_DEC_PER_DISC:
@@ -444,8 +492,11 @@ public abstract class DGridUtils {
                 type = DGuiConsts.GUI_TYPE_INT;
                 break;
             case DGridConsts.COL_TYPE_DEC_0D:
+            case DGridConsts.COL_TYPE_DEC_1D:
             case DGridConsts.COL_TYPE_DEC_2D:
+            case DGridConsts.COL_TYPE_DEC_3D:
             case DGridConsts.COL_TYPE_DEC_4D:
+            case DGridConsts.COL_TYPE_DEC_6D:
             case DGridConsts.COL_TYPE_DEC_8D:
                 type = DGuiConsts.GUI_TYPE_DEC;
                 break;
@@ -462,8 +513,11 @@ public abstract class DGridUtils {
                 type = DGuiConsts.GUI_TYPE_DEC_QTY;
                 break;
             case DGridConsts.COL_TYPE_DEC_PER_0D:
+            case DGridConsts.COL_TYPE_DEC_PER_1D:
             case DGridConsts.COL_TYPE_DEC_PER_2D:
+            case DGridConsts.COL_TYPE_DEC_PER_3D:
             case DGridConsts.COL_TYPE_DEC_PER_4D:
+            case DGridConsts.COL_TYPE_DEC_PER_6D:
             case DGridConsts.COL_TYPE_DEC_PER_8D:
                 type = DGuiConsts.GUI_TYPE_DEC_PER;
                 break;
@@ -534,16 +588,22 @@ public abstract class DGridUtils {
                 typeClass = Integer.class;
                 break;
             case DGridConsts.COL_TYPE_DEC_0D:
+            case DGridConsts.COL_TYPE_DEC_1D:
             case DGridConsts.COL_TYPE_DEC_2D:
+            case DGridConsts.COL_TYPE_DEC_3D:
             case DGridConsts.COL_TYPE_DEC_4D:
+            case DGridConsts.COL_TYPE_DEC_6D:
             case DGridConsts.COL_TYPE_DEC_8D:
             case DGridConsts.COL_TYPE_DEC_AMT:
             case DGridConsts.COL_TYPE_DEC_AMT_UNIT:
             case DGridConsts.COL_TYPE_DEC_EXC_RATE:
             case DGridConsts.COL_TYPE_DEC_QTY:
             case DGridConsts.COL_TYPE_DEC_PER_0D:
+            case DGridConsts.COL_TYPE_DEC_PER_1D:
             case DGridConsts.COL_TYPE_DEC_PER_2D:
+            case DGridConsts.COL_TYPE_DEC_PER_3D:
             case DGridConsts.COL_TYPE_DEC_PER_4D:
+            case DGridConsts.COL_TYPE_DEC_PER_6D:
             case DGridConsts.COL_TYPE_DEC_PER_8D:
             case DGridConsts.COL_TYPE_DEC_PER_TAX:
             case DGridConsts.COL_TYPE_DEC_PER_DISC:
@@ -933,7 +993,7 @@ public abstract class DGridUtils {
         double a = 0;
         double b = 0;
         double value = 0;
-        Deque<Object> stack = new ArrayDeque<Object>();
+        Deque<Object> stack = new ArrayDeque<>();
         Vector<DLibRpnArgument> arguments = null;
         DLibRpnOperator operator = null;
 
