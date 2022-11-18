@@ -572,16 +572,15 @@ public abstract class DGridPaneView extends JPanel implements DGridPane, ListSel
             // Sort keys:
 
             if (sortKeys.isEmpty()) {
-                sortKeys = new ArrayList<RowSorter.SortKey>();
+                sortKeys = new ArrayList<>();
                 sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));    // just in case there are not sort keys
             }
-            else {
-                for (RowSorter.SortKey sortKey : sortKeys) {
-                    DXmlSortKey xmlSortKey = new DXmlSortKey();
-                    xmlSortKey.getAttribute(DXmlSortKey.ATT_COLUMN).setValue(jtTable.convertColumnIndexToView(sortKey.getColumn()));
-                    xmlSortKey.getAttribute(DXmlSortKey.ATT_SORT_ORDER).setValue(sortKey.getSortOrder().toString());
-                    gridXml.getXmlElements().add(xmlSortKey);
-                }
+            
+            for (RowSorter.SortKey sortKey : sortKeys) {
+                DXmlSortKey xmlSortKey = new DXmlSortKey();
+                xmlSortKey.getAttribute(DXmlSortKey.ATT_COLUMN).setValue(jtTable.convertColumnIndexToView(sortKey.getColumn()));
+                xmlSortKey.getAttribute(DXmlSortKey.ATT_SORT_ORDER).setValue(sortKey.getSortOrder().toString());
+                gridXml.getXmlElements().add(xmlSortKey);
             }
 
             xml = gridXml.getXmlString();
