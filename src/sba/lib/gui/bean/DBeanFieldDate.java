@@ -130,7 +130,7 @@ public class DBeanFieldDate extends JPanel implements DGuiFieldDate {
         mnGuiType = DLibConsts.UNDEFINED;
         moSimpleDateFormat = null;
         mtDefaultValue = null;
-        mtMinDate = DLibTimeUtils.createDate(DLibTimeConsts.YEAR_MIN, 01, 01);
+        mtMinDate = DLibTimeUtils.createDate(DLibTimeConsts.YEAR_MIN, 1, 1);
         mtMaxDate = DLibTimeUtils.createDate(DLibTimeConsts.YEAR_MAX, 12, 31);
         mbMandatory = true;
         moNextField = null;

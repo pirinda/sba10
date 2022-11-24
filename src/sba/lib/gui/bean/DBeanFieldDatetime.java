@@ -52,7 +52,7 @@ public class DBeanFieldDatetime extends JPanel implements DGuiFieldDate {
 
     /** Creates new form SBeanFieldDate */
     public DBeanFieldDatetime() {
-        mtMinDate = DLibTimeUtils.createDate(DLibTimeConsts.YEAR_MIN, 01, 01);
+        mtMinDate = DLibTimeUtils.createDate(DLibTimeConsts.YEAR_MIN, 1, 1);
         mtMaxDate = DLibTimeUtils.createDate(DLibTimeConsts.YEAR_MAX, 12, 31);
         mtDefaultValue = mtMinDate;
         resetGuiType();
