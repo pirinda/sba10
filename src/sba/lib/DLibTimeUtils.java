@@ -372,7 +372,7 @@ public abstract class DLibTimeUtils {
      */
 
     public static boolean isLeapYear(final int year) {
-        return year % 4 == 0;
+        return year % 400 == 0 || (year % 4 == 0 && year % 100 != 0);
     }
 
     public static boolean isLeapYear(final Date date) {
@@ -419,6 +419,16 @@ public abstract class DLibTimeUtils {
         }
         
         return string;
+    }
+    
+    /**
+     * Format period as 'dd/mm/yyyy - dd/mm/yyyy'. When either argument is <code>null</code>, it is replaced by '...' in resulting string.
+     * @param start Start date of period.
+     * @param end End date of period.
+     * @return Formatted string.
+     */
+    public static String dateFormatDatePeriod(final Date start, final Date end) {
+        return (start != null ? DLibUtils.DateFormatDate.format(start) : "...") + " - " + (end != null ? DLibUtils.DateFormatDate.format(end) : "...");
     }
     
     /**
