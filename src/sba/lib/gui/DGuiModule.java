@@ -43,6 +43,7 @@ public abstract class DGuiModule implements DGuiController {
     protected int mnModuleSubtype;
     protected JMenu[] maMenus;
     protected DDbRegistry moLastRegistry;
+    protected int mnLastFormResult;
     protected HashMap<Integer, DGuiForm> moUserFormsMap;
     protected ImageIcon moModuleIcon;
 
@@ -52,6 +53,7 @@ public abstract class DGuiModule implements DGuiController {
         mnModuleSubtype = subtype;
         maMenus = null;
         moLastRegistry = null;
+        mnLastFormResult = 0;
         moUserFormsMap = null;
         moModuleIcon = null;
     }
@@ -152,6 +154,7 @@ public abstract class DGuiModule implements DGuiController {
     public int getModuleType() { return mnModuleType; }
     public int getModuleSubtype() { return mnModuleSubtype; }
     public DDbRegistry getLastRegistry() { return moLastRegistry; }
+    public int getLastFormResult() { return mnLastFormResult; }
     public HashMap<Integer, DGuiForm> getUserFormsMap() { return moUserFormsMap; }
     public ImageIcon getModuleIcon() { return moModuleIcon; }
     public void afterRegistrySaved() { }
@@ -244,6 +247,7 @@ public abstract class DGuiModule implements DGuiController {
             form = getForm(type, subtype, params);
             registry = getRegistry(type, params);
             moLastRegistry = null;
+            mnLastFormResult = 0;
 
             if (params == null) {
                 registry.setFormAction(DGuiConsts.FORM_ACTION_NEW);
@@ -279,7 +283,7 @@ public abstract class DGuiModule implements DGuiController {
 
             form.setFormVisible(true);
 
-            if (form.getFormResult() == DGuiConsts.FORM_RESULT_OK) {
+            if ((mnLastFormResult = form.getFormResult()) == DGuiConsts.FORM_RESULT_OK) {
                 registry = form.getRegistry();
 
                 if (miClient.getSession().saveRegistry(registry) != DDbConsts.SAVE_OK) {
