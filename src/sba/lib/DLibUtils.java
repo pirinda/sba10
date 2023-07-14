@@ -57,8 +57,12 @@ public abstract class DLibUtils {
     public static final SimpleDateFormat DateFormatDate = new SimpleDateFormat("dd/MM/yyyy");
     public static final SimpleDateFormat DateFormatDateShort = new SimpleDateFormat("dd/MM/yy");
     public static final SimpleDateFormat DateFormatDateLong = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy");
+    public static final SimpleDateFormat DateFormatDateShortMonthYear = new SimpleDateFormat("dd MMM yyyy");
+    public static final SimpleDateFormat DateFormatDateShortMonth = new SimpleDateFormat("dd MMM yy");
     public static final SimpleDateFormat DateFormatDateDayMonthLong = new SimpleDateFormat("dd 'de' MMMM");
+    public static final SimpleDateFormat DateFormatDateMonthYearLong = new SimpleDateFormat("MMMM yy");
     public static final SimpleDateFormat DateFormatDateYearMonth = new SimpleDateFormat("yyyy-MM");
+    public static final SimpleDateFormat DateFormatDateDayMonth = new SimpleDateFormat("dd MMM");
     public static final SimpleDateFormat DateFormatDateYear = new SimpleDateFormat("yyyy");
     public static final SimpleDateFormat DateFormatDateDay = new SimpleDateFormat("dd");
     public static final SimpleDateFormat DateFormatDatetime = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -197,6 +201,15 @@ public abstract class DLibUtils {
     public static void restoreDateFormats(final TimeZone zone) {
         DateFormatDate.setTimeZone(zone);
         DateFormatDateShort.setTimeZone(zone);
+        DateFormatDateLong.setTimeZone(zone);
+        DateFormatDateShortMonthYear.setTimeZone(zone);
+        DateFormatDateShortMonth.setTimeZone(zone);
+        DateFormatDateDayMonthLong.setTimeZone(zone);
+        DateFormatDateMonthYearLong.setTimeZone(zone);
+        DateFormatDateYearMonth.setTimeZone(zone);
+        DateFormatDateDayMonth.setTimeZone(zone);
+        DateFormatDateYear.setTimeZone(zone);
+        DateFormatDateDay.setTimeZone(zone);
         DateFormatDatetime.setTimeZone(zone);
         DateFormatDatetimeTimeZone.setTimeZone(zone);
         DateFormatTime.setTimeZone(zone);
@@ -207,17 +220,20 @@ public abstract class DLibUtils {
         CsvFormatDatetime.setTimeZone(zone);
         CsvFormatTime.setTimeZone(zone);
         FileDateFormatDatetime.setTimeZone(zone);
+        IsoFormatDate.setTimeZone(zone);
+        IsoFormatDatetime.setTimeZone(zone);
     }
 
     public static TimeZone createTimeZone(TimeZone zoneDefault, TimeZone zoneNew) {
         TimeZone zone = null;
 
-        if (zoneDefault.getRawOffset() == zoneNew.getRawOffset()) {
+        if (zoneDefault.getRawOffset() == zoneNew.getRawOffset() &&
+                zoneDefault.useDaylightTime() == zoneNew.useDaylightTime() &&
+                zoneDefault.getDSTSavings() == zoneNew.getDSTSavings()) {
             zone = zoneDefault;
         }
         else {
             zone = zoneNew;
-            zone.setRawOffset(zoneNew.getRawOffset() + zoneDefault.getDSTSavings());
         }
 
         return zone;

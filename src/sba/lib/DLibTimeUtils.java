@@ -453,4 +453,27 @@ public abstract class DLibTimeUtils {
             return DLibUtils.DateFormatDateDay.format(startDate) + " al " + DLibUtils.DateFormatDateLong.format(endDate);
         }
     }
+    
+    /**
+     * Formats period of dates considering if the are from the same year or same month.
+     * @param startDate Start date of period.
+     * @param endDate End date of period.
+     * @return Formatted string.
+     */
+    public static String dateFormatDatePeriodShort(final Date startDate, final Date endDate) {
+        Calendar start = Calendar.getInstance();
+        Calendar end = Calendar.getInstance();
+        start.setTime(startDate);
+        end.setTime(endDate);
+        
+        if (start.get(Calendar.YEAR) != end.get(Calendar.YEAR)) {
+            return DLibUtils.DateFormatDateShortMonth.format(startDate) + " al " + DLibUtils.DateFormatDateShortMonth.format(endDate);
+        }
+        else if (start.get(Calendar.MONTH) != end.get(Calendar.MONTH)) {
+            return DLibUtils.DateFormatDateDayMonth.format(startDate) + " al " + DLibUtils.DateFormatDateShortMonth.format(endDate);
+        }
+        else {
+            return DLibUtils.DateFormatDateDay.format(startDate) + " al " + DLibUtils.DateFormatDateShortMonth.format(endDate);
+        }
+    }
 }

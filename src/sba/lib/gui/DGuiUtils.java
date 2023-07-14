@@ -27,11 +27,11 @@ import sba.lib.DLibUtils;
 public abstract class DGuiUtils {
 
     public static void setCursorWait(final DGuiClient client) {
-        client.getFrame().setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        client.getFrame().getRootPane().setCursor(new Cursor(Cursor.WAIT_CURSOR));
     }
 
     public static void setCursorDefault(final DGuiClient client) {
-        client.getFrame().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        client.getFrame().getRootPane().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }
 
     public static void setWindowBounds(final Window window, final int width, final int height) {
